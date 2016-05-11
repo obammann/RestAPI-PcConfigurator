@@ -24,18 +24,21 @@ class Application extends Silex
             return new OrderService();
         });
 
+        $app['service.processor'] = $app->share(function () {
+            return new ProcessorService();
+        });
+
         // Order Routen
         $this->get('/order', 'service.order:getList');
         $this->get('/order/{orderId}', 'service.order:getDetails');
         $this->post('/order', 'service.order:createOrder');
         $this->put('/order/{orderId}', 'service.order:changeOrder');
 
-        $this->get('/processor', function(){
+        // Processor Routen
+        $this->get('/processor', 'service.processor:getList');
 
-            $pro = new ProcessorService();
-            $pro->getList();
 
-        });
+
 
 
         // http://silex.sensiolabs.org/doc/cookbook/json_request_body.html

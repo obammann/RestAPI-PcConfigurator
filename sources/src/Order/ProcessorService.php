@@ -15,14 +15,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ProcessorService
 {
 
+    /**
+     * GET /processor
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function getList()
     {
-        $orders = [
+        $processors = [
             new Processor('name 1', 'processor 1'),
             new Processor('name 2', 'processor 2'),
+            new Processor('name 3', 'processor 3'),
         ];
 
-        return new JsonResponse($orders);
+
+        return new JsonResponse($processors);
     }
 
     public function getSingleProcessor($name, $sockel){

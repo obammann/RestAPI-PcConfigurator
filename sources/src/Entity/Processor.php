@@ -9,7 +9,7 @@
 namespace HsBremen\WebApi\Entity;
 
 
-class Processor
+class Processor implements \JsonSerializable
 {
     private $name;
     private $sockel;
@@ -25,7 +25,6 @@ class Processor
         return [
             'name'     => $this->name,
             'sockel'    => $this->sockel,
-            'status' => 'placed',
         ];
     }
 
