@@ -36,7 +36,7 @@ class Application extends Silex
 
         // Processor Routen
         $this->get('/processor', 'service.processor:getList');
-
+        $this->get('/processor/{name}/{sockel}', 'service.processor:getSingleProcessor');
 
 
 

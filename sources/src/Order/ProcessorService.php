@@ -9,11 +9,19 @@
 namespace HsBremen\WebApi\Order;
 
 
+use HsBremen\WebApi\Database\ProcessorDatabase;
 use HsBremen\WebApi\Entity\Processor;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProcessorService
 {
+    private $database;
+
+    public function __construct()
+    {
+        $this->database = new ProcessorDatabase();
+    }
 
     /**
      * GET /processor
@@ -22,33 +30,24 @@ class ProcessorService
      */
     public function getList()
     {
-        $processors = [
-            new Processor('name 1', 'processor 1'),
-            new Processor('name 2', 'processor 2'),
-            new Processor('name 3', 'processor 3'),
-        ];
-
-
-        return new JsonResponse($processors);
+        $listOFAllProcessors = $this->database->getProcessorDatabase();
+        return new JsonResponse($listOFAllProcessors);
     }
+
 
     public function getSingleProcessor($name, $sockel){
 
         //TODO get Database (Object array)
-        $orders = [
-            new Processor('name 1', 'processor 1'),
-            new Processor('name 2', 'processor 2'),
-        ];
 
-        foreach ($orders as $iter) {
+        $processor = $this->database->getProcessorDatabase();
 
-            if($iter->getName() === $name && $iter->getSockel() === $sockel){
+        foreach ($processor as $iter) {
+
+            if($iter->getName() === $name && $iter->getSocket() === $sockel){
                 return new JsonResponse($iter);
             }
-            else{
-                return new JsonResponse(new Processor('0', '0'));
-            }
         }
+        return new JsonResponse(new Processor(0,0,0,0,0, 0));
     }
 
 }
