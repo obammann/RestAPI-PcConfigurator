@@ -40,6 +40,7 @@ class OrderService
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \InvalidArgumentException
      */
     public function createOrder(Request $request)
     {
@@ -53,6 +54,7 @@ class OrderService
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \InvalidArgumentException
      */
     public function changeOrder(Request $request)
     {
