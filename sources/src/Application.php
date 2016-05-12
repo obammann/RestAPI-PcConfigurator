@@ -2,8 +2,8 @@
 
 namespace HsBremen\WebApi;
 
-use HsBremen\WebApi\Order\OrderService;
-use HsBremen\WebApi\Order\ProcessorService;
+use HsBremen\WebApi\Service\OrderService;
+use HsBremen\WebApi\Service\ProcessorService;
 use Silex\Application as Silex;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +28,7 @@ class Application extends Silex
             return new ProcessorService();
         });
 
-        // Order Routen
+        // Service Routen
         $this->get('/order', 'service.order:getList');
         $this->get('/order/{orderId}', 'service.order:getDetails');
         $this->post('/order', 'service.order:createOrder');

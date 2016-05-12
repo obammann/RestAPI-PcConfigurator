@@ -1,6 +1,6 @@
 <?php
 
-namespace HsBremen\WebApi\Order;
+namespace HsBremen\WebApi\Service;
 
 use HsBremen\WebApi\Entity\Order;
 use Symfony\Component\HttpFoundation\JsonResponse;

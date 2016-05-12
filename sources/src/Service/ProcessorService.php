@@ -6,7 +6,7 @@
  * Time: 14:39
  */
 
-namespace HsBremen\WebApi\Order;
+namespace HsBremen\WebApi\Service;
 
 
 use HsBremen\WebApi\Database\ProcessorDatabase;
