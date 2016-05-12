@@ -31,7 +31,7 @@ class GraphicCard extends Component implements \JsonSerializable
         $this->slotsOccupied = $slotsOccupied;
         $this->memory = $memory;
     }
-    
+
     function jsonSerialize()
     {
         return [
