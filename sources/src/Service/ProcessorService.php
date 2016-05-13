@@ -35,19 +35,23 @@ class ProcessorService
     }
 
 
-    public function getSingleProcessor($name, $sockel){
+    public function getSingleProcessor($id){
 
-        //TODO get Database (Object array)
-
-        $processor = $this->database->getProcessorDatabase();
-
-        foreach ($processor as $iter) {
-
-            if($iter->getName() === $name && $iter->getSocket() === $sockel){
-                return new JsonResponse($iter);
-            }
+        if($this->database->readProcessor($id) !== null){
+            return new JsonResponse($this->database->readProcessor($id));
+        }else{
+            return new JsonResponse(new Processor(0,0,0,0,0,0));
         }
-        return new JsonResponse(new Processor(0,0,0,0,0, 0));
     }
+
+
+    public function addProcessor($processor){
+        $this->database->addProcessor($processor);
+    }
+
+    public function updateProcessor($id, $name, $price, $processorSocket, $frequency, $cores){
+        $this->database->updateProcessor($id, $name, $price, $processorSocket, $frequency, $cores);
+    }
+
 
 }

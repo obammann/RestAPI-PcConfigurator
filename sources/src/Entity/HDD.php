@@ -2,28 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: Fabian
- * Date: 11.05.16
- * Time: 14:34
+ * Date: 13.05.16
+ * Time: 20:31
  */
 
 namespace HsBremen\WebApi\Entity;
 
 
-class Processor extends Component implements \JsonSerializable
+class HDD extends Component implements \JsonSerializable
 {
-    private $processorSocket;
-    private $frequency;
-    private $cores;
 
+    private $type;
+    private $memory;
 
-    public function __construct($id, $name, $price, $processorSocket, $frequency, $cores)
+    public function __construct($id, $name, $price, $type, $memory)
     {
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;
-        $this->processorSocket= $processorSocket;
-        $this->frequency = $frequency;
-        $this->cores = $cores;
+        $this->type = $type;
+        $this->memory = $memory;
     }
 
     function jsonSerialize()
@@ -32,9 +30,8 @@ class Processor extends Component implements \JsonSerializable
             'id'        => $this->id,
             'name'      => $this->name,
             'price'     => $this->price,
-            'processor socket'    => $this->processorSocket,
-            'frequency' => $this->frequency,
-            'cores'     => $this->cores,
+            'type'    => $this->type,
+            'memory' => $this->memory,
         ];
     }
 
@@ -89,50 +86,32 @@ class Processor extends Component implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getProcessorSocket()
+    public function getType()
     {
-        return $this->processorSocket;
+        return $this->type;
     }
 
     /**
-     * @param mixed $processorSocket
+     * @param mixed $type
      */
-    public function setProcessorSocket($processorSocket)
+    public function setType($type)
     {
-        $this->processorSocket = $processorSocket;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCores()
-    {
-        return $this->cores;
-    }
-
-    /**
-     * @param mixed $cores
-     */
-    public function setCores($cores)
-    {
-        $this->cores = $cores;
+        $this->type = $type;
     }
 
     /**
      * @return mixed
      */
-    public function getFrequency()
+    public function getMemory()
     {
-        return $this->frequency;
+        return $this->memory;
     }
 
     /**
-     * @param mixed $frequency
+     * @param mixed $memory
      */
-    public function setFrequency($frequency)
+    public function setMemory($memory)
     {
-        $this->frequency = $frequency;
+        $this->memory = $memory;
     }
-
-
 }

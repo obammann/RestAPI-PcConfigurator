@@ -39,9 +39,12 @@ class Application extends Silex
         $this->post('/order', 'service.order:createOrder');
         $this->put('/order/{orderId}', 'service.order:changeOrder');
 
+
         // Processor Routen
         $this->get('/processor', 'service.processor:getList');
-        $this->get('/processor/{name}/{sockel}', 'service.processor:getSingleProcessor');
+        $this->get('/processor/{id}', 'service.processor:getSingleProcessor');
+        $this->put('/processor/{id}/{name}/{price}/{socket}/{frequency}/{cores}', 'service.processor:updateProcessor');
+        $this->delete('/processor/{id}', 'service.processor:deleteProcessor');
 
         //Processor cooler Routen
         $this->get('/processorcooler', 'service.processorCooler:getList');
