@@ -43,7 +43,7 @@ class Application extends Silex
         // Processor Routen
         $this->get('/processor', 'service.processor:getList');
         $this->get('/processor/{id}', 'service.processor:getSingleProcessor');
-        $this->put('/processor/{id}/{name}/{price}/{socket}/{frequency}/{cores}', 'service.processor:updateProcessor');
+        $this->put('/processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:updateProcessor');
         $this->delete('/processor/{id}', 'service.processor:deleteProcessor');
 
         //Processor cooler Routen
