@@ -32,27 +32,27 @@ class ProcessorCoolerDatabase extends AbstractDatabase
         ];
     }
 
-    protected function getDatabase()
+    public function getDatabase()
     {
         return $this->processorCoolerDatabase;
     }
 
-    protected function setDatabase($database)
+    public function setDatabase($database)
     {
        $this->processorCoolerDatabase = $database;
     }
 
-    protected function addComponent($newComponent)
+    public function addComponent($newComponent)
     {
         array_push($this->processorCoolerDatabase, $newComponent);
     }
 
-    protected function getComponent($componentId)
+    public function getComponent($componentId)
     {
         return $this->processorCoolerDatabase[$componentId];
     }
 
-    protected function updateComponent($param0, $param1, $param2, $param3, $param4 = null, $param5 = null, $param6 = null, $param7 = null)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4 = null, $param5 = null, $param6 = null, $param7 = null)
     {
         $this->processorCoolerDatabase[$param0]->setName($param1);
         $this->processorCoolerDatabase[$param0]->setPrice($param2);
@@ -60,7 +60,7 @@ class ProcessorCoolerDatabase extends AbstractDatabase
 
     }
 
-    protected function deleteComponent($componentId)
+    public function deleteComponent($componentId)
     {
         unset($this->processorCoolerDatabase[$componentId]);
     }

@@ -34,27 +34,27 @@ class MemoryDatabase extends AbstractDatabase
         ];
     }
 
-    protected function getDatabase()
+    public function getDatabase()
     {
         return $this->memoryDatabase;
     }
 
-    protected function setDatabase($database)
+    public function setDatabase($database)
     {
         $this->memoryDatabase = $database;
     }
 
-    protected function addComponent($newComponent)
+    public function addComponent($newComponent)
     {
         array_push($this->memoryDatabase, $newComponent);
     }
 
-    protected function getComponent($componentId)
+    public function getComponent($componentId)
     {
         return $this->memoryDatabase[$componentId];
     }
 
-    protected function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6 = null, $param7 = null)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6 = null, $param7 = null)
     {
         $this->memoryDatabase[$param0]->setName($param1);
         $this->memoryDatabase[$param0]->setPrice($param2);
@@ -63,7 +63,7 @@ class MemoryDatabase extends AbstractDatabase
         $this->memoryDatabase[$param0]->setMemory($param5);
     }
 
-    protected function deleteComponent($componentId)
+    public function deleteComponent($componentId)
     {
         unset($this->memoryDatabase[$componentId]);
     }

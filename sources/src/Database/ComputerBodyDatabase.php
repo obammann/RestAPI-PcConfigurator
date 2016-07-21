@@ -31,34 +31,34 @@ class ComputerBodyDatabase extends AbstractDatabase
         ];
     }
 
-    protected function getDatabase()
+    public function getDatabase()
     {
        return $this->computerBodyDatabase;
     }
 
-    protected function setDatabase($database)
+    public function setDatabase($database)
     {
         $this->computerBodyDatabase = $database;
     }
 
-    protected function addComponent($newComponent)
+    public function addComponent($newComponent)
     {
         array_push($this->computerBodyDatabase, $newComponent);
     }
 
-    protected function getComponent($componentId)
+    public function getComponent($componentId)
     {
         return $this->computerBodyDatabase[$componentId];
     }
 
-    protected function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7)
     {
         $this->computerBodyDatabase[$param0]->setName($param1);
         $this->computerBodyDatabase[$param0]->setPrice($param2);
         $this->computerBodyDatabase[$param0]->setFormFactor($param3);
     }
 
-    protected function deleteComponent($componentId)
+    public function deleteComponent($componentId)
     {
         unset($this->computerBodyDatabase[$componentId]);
     }

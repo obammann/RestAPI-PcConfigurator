@@ -33,27 +33,27 @@ class MainboardDatabase extends AbstractDatabase
         ];
     }
 
-    protected function getDatabase()
+    public function getDatabase()
     {
         return $this->mainboardDatabase;
     }
 
-    protected function setDatabase($database)
+    public function setDatabase($database)
     {
         $this->mainboardDatabase = $database;
     }
 
-    protected function addComponent($newComponent)
+    public function addComponent($newComponent)
     {
         array_push($this->mainboardDatabase, $newComponent);
     }
 
-    protected function getComponent($componentId)
+    public function getComponent($componentId)
     {
         return $this->mainboardDatabase[$componentId];
     }
 
-    protected function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7)
     {
         $this->mainboardDatabase[$param0]->setName($param1);
         $this->mainboardDatabase[$param0]->setPrice($param2);
@@ -64,7 +64,7 @@ class MainboardDatabase extends AbstractDatabase
         $this->mainboardDatabase[$param0]->setNumberPCIeSlots($param7);
     }
 
-    protected function deleteComponent($componentId)
+    public function deleteComponent($componentId)
     {
         unset($this->mainboardDatabase[$componentId]);
     }

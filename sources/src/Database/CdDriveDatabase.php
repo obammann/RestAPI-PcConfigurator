@@ -32,27 +32,27 @@ class CdDriveDatabase extends AbstractDatabase
         ];
     }
 
-    protected function getDatabase()
+    public function getDatabase()
     {
         return $this->cdDriveDatabase;
     }
 
-    protected function setDatabase($database)
+    public function setDatabase($database)
     {
         $this->cdDriveDatabase = $database;
     }
 
-    protected function addComponent($newComponent)
+    public function addComponent($newComponent)
     {
         array_push($this->cdDriveDatabase, $newComponent);
     }
 
-    protected function getComponent($componentId)
+    public function getComponent($componentId)
     {
         return $this->cdDriveDatabase[$componentId];
     }
 
-    protected function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7=null)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7=null)
     {
         $this->cdDriveDatabase[$param0]->setName($param1);
         $this->cdDriveDatabase[$param0]->setPrice($param2);
@@ -62,7 +62,7 @@ class CdDriveDatabase extends AbstractDatabase
         $this->cdDriveDatabase[$param0]->setIsBluRay($param6);
     }
 
-    protected function deleteComponent($componentId)
+    public function deleteComponent($componentId)
     {
         unset($this->cdDriveDatabase[$componentId]);
     }

@@ -32,34 +32,34 @@ class PowerSupplyDatabase extends AbstractDatabase
         ];
     }
 
-    protected function getDatabase()
+    public function getDatabase()
     {
         return $this->powerSupplyDatabase;
     }
 
-    protected function setDatabase($database)
+    public function setDatabase($database)
     {
         $this->powerSupplyDatabase = $database;
     }
 
-    protected function addComponent($newComponent)
+    public function addComponent($newComponent)
     {
         array_push($this->powerSupplyDatabase, $newComponent);
     }
 
-    protected function getComponent($componentId)
+    public function getComponent($componentId)
     {
         return $this->powerSupplyDatabase[$componentId];
     }
 
-    protected function updateComponent($param0, $param1, $param2, $param3, $param4 = null, $param5 = null, $param6 = null, $param7 = null)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4 = null, $param5 = null, $param6 = null, $param7 = null)
     {
         $this->powerSupplyDatabase[$param0]->setName($param1);
         $this->powerSupplyDatabase[$param0]->setPrice($param2);
         $this->powerSupplyDatabase[$param0]->setPower($param3);
     }
 
-    protected function deleteComponent($componentId)
+    public function deleteComponent($componentId)
     {
         unset($this->powerSupplyDatabase[$componentId]);
     }

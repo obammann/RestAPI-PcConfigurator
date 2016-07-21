@@ -30,27 +30,27 @@ class GraphicCardDatabase extends AbstractDatabase
         ];
     }
 
-    protected function getDatabase()
+    public function getDatabase()
     {
         return $this->graphicCardDatabase;
     }
 
-    protected function setDatabase($database)
+    public function setDatabase($database)
     {
        $this->graphicCardDatabase = $database;
     }
 
-    protected function addComponent($newComponent)
+    public function addComponent($newComponent)
     {
         array_push($this->graphicCardDatabase, $newComponent);
     }
 
-    protected function getComponent($componentId)
+    public function getComponent($componentId)
     {
         return $this->graphicCardDatabase[$componentId];
     }
 
-    protected function updateComponent($param0, $param1, $param2, $param3, $param4, $param5 = null, $param6 = null, $param7 = null)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5 = null, $param6 = null, $param7 = null)
     {
         $this->graphicCardDatabase[$param0]->setName($param1);
         $this->graphicCardDatabase[$param0]->setPrice($param2);
@@ -58,7 +58,7 @@ class GraphicCardDatabase extends AbstractDatabase
         $this->graphicCardDatabase[$param0]->setMemory($param4);
     }
 
-    protected function deleteComponent($componentId)
+    public function deleteComponent($componentId)
     {
         unset($this->graphicCardDatabase[$componentId]);
     }

@@ -9,19 +9,27 @@
 namespace HsBremen\WebApi\Service;
 
 
-use HsBremen\WebApi\Entity\ProcessorCooler;
+use HsBremen\WebApi\Database\ProcessorCoolerDatabase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProcessorCoolerService
 {
+    private $database;
+    public  static $TAG = 'ProcessorCoolerService';
+
+    public function __construct()
+    {
+         $this->database = new ProcessorCoolerDatabase();
+    }
+
+
+    /**
+     * @return JsonResponse
+     */
     public function getList()
     {
-        $processorCoolers = [
-            new ProcessorCooler(1, 'cooler', 100, 'AM2'),
-        ];
-        return new JsonResponse($processorCoolers);
-        /*$listOFAllProcessors = $this->database->getProcessorDatabase();
-        return new JsonResponse($listOFAllProcessors);*/
+        $listOfAllProcessorCoolers = $this->database->getDatabase();
+        return new JsonResponse($listOfAllProcessorCoolers);
     }
 
 }
