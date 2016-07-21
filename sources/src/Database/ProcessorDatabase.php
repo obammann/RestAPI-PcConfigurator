@@ -17,8 +17,6 @@ class ProcessorDatabase extends AbstractDatabase
 
     private $processorDatabase;
 
-
-
     public function __construct()
     {
         $this->processorDatabase = [
@@ -33,10 +31,7 @@ class ProcessorDatabase extends AbstractDatabase
             new Processor(8, 'Intel Core i7-5930K', 629, '2011-3', 3500, 6),
             new Processor(9, 'AMD FX-8300', 384, 'AM3+', 3300, 8),
         ];
-
     }
-
-
 
     public function getDatabase()
     {

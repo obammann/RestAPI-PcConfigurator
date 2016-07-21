@@ -3,7 +3,6 @@
 namespace HsBremen\WebApi;
 
 use HsBremen\WebApi\Service\AbstractResponse;
-use HsBremen\WebApi\Service\OrderService;
 use HsBremen\WebApi\Service\ProcessorCoolerService;
 use HsBremen\WebApi\Service\ProcessorService;
 use Silex\Application as Silex;
@@ -30,9 +29,6 @@ class Application extends Silex
             return new ProcessorService();
         });
 
-        $app['service.order'] = $app->share(function () {
-            return new OrderService();
-        });
 
         $app['service.processorCooler'] = $app->share(function () {
             return new ProcessorCoolerService();
@@ -47,12 +43,6 @@ class Application extends Silex
         $this->post('processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:addProcessor');
         $this->put('/processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:updateProcessor');
         $this->delete('/processor/{id}', 'service.processor:deleteProcessor');
-
-        // Service Routen
-        $this->get('/order', 'service.order:getList');
-        $this->get('/order/{orderId}', 'service.order:getDetails');
-        $this->post('/order', 'service.order:createOrder');
-        $this->put('/order/{orderId}', 'service.order:changeOrder');
 
         //Processor cooler Routen
         $this->get('/processorcooler', 'service.processorCooler:getList');

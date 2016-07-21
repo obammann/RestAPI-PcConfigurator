@@ -8,7 +8,6 @@
 
 namespace HsBremen\WebApi\Service;
 
-
 use HsBremen\WebApi\Database\ProcessorDatabase;
 use HsBremen\WebApi\Entity\Processor;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,11 +23,6 @@ class ProcessorService
         $this->database = new ProcessorDatabase();
     }
 
-    /**
-     * GET /processor
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
     public function getList()
     {
         $listOFAllProcessors = $this->database->getDatabase();
