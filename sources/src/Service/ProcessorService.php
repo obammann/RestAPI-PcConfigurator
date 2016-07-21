@@ -11,23 +11,17 @@ namespace HsBremen\WebApi\Service;
 
 use HsBremen\WebApi\Database\ProcessorDatabase;
 use HsBremen\WebApi\Entity\Processor;
-
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+
 
 class ProcessorService
 {
     private $database;
+    public  static $TAG = 'ProcessorService';
 
     public function __construct()
     {
         $this->database = new ProcessorDatabase();
-
-//        $this->updateProcessor(1,2,3,4,5,6);
-//        $this->deleteProcessor(9);
-//
-//        $trash = new Processor(10, 'name', 123, '1155', 2.4, 8);
-//        $this->addProcessor($trash);
     }
 
     /**
@@ -37,34 +31,57 @@ class ProcessorService
      */
     public function getList()
     {
-        $listOFAllProcessors = $this->database->getProcessorDatabase();
+        $listOFAllProcessors = $this->database->getDatabase();
         return new JsonResponse($listOFAllProcessors);
     }
 
 
     public function getSingleProcessor($id){
 
-        if($this->database->readProcessor($id) !== null){
-            return new JsonResponse($this->database->readProcessor($id));
+        if($this->database->getComponent($id) !== null){
+            return new JsonResponse($this->database->getComponent($id));
         }else{
-            return new JsonResponse(new Processor(0,0,0,0,0,0));
+            $getSingleProcessorResponse = new AbstractResponse();
+            $getSingleProcessorResponse->initResponse(ProcessorService::$TAG, $id, "getSingleProcessor", "fail: no item found");
+            return new JsonResponse($getSingleProcessorResponse->jsonSerialize());
         }
     }
 
 
-    public function addProcessor($processor){
-        $this->database->addProcessor($processor);
+    public function addProcessor($id, $name, $price, $processorSocket, $frequency, $cores){
+        $addProcessorResponse = new AbstractResponse();
+        try{
+            $this->database->addComponent(new Processor($id,$name, $price, $processorSocket, $frequency, $cores ));
+            $addProcessorResponse->initResponse($name, $id, "addProcessor", "success");
+            return new JsonResponse($addProcessorResponse->jsonSerialize());
+        }catch (\Exception $e){
+            $addProcessorResponse->initResponse($name, $id, "addProcessor", $e->getMessage());
+            return new JsonResponse($addProcessorResponse->jsonSerialize());
+        }
     }
 
     public function updateProcessor($id, $name, $price, $processorSocket, $frequency, $cores){
-        $this->database->updateProcessor($id, $name, $price, $processorSocket, $frequency, $cores);
-        return new JsonResponse(new Processor($id,$name,$price,$processorSocket,$frequency,$cores));
+        $updateResponse = new AbstractResponse();
+        try {
+            $this->database->updateComponent($id, $name, $price, $processorSocket, $frequency, $cores);
+            $updateResponse->initResponse($name, $id, "updateProcessor()", "success");
+            return new JsonResponse($updateResponse->jsonSerialize());
+        }catch (\Exception $e){
+            $updateResponse->initResponse($name, $id, "updateProcessor()", + $e->getMessage() );
+            return new JsonResponse($updateResponse->jsonSerialize());
+        }
     }
 
     public function deleteProcessor($id){
-        $deletedProcessor = $this->database->readProcessor($id);
-        $this->database->deleteProcessor($id);
-        return new JsonResponse($deletedProcessor);
+        $deleteResponse = new AbstractResponse();
+        try {
+            $this->database->deleteComponent($id);
+            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteProcessor()", "success");
+            return new JsonResponse($deleteResponse->jsonSerialize());
+        }catch (\Exception $e){
+            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteProcessor()", $e->getMessage());
+            return new JsonResponse($deleteResponse->jsonSerialize());
+        }
     }
 
 

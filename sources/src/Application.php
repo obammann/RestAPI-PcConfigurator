@@ -2,6 +2,7 @@
 
 namespace HsBremen\WebApi;
 
+use HsBremen\WebApi\Service\AbstractResponse;
 use HsBremen\WebApi\Service\OrderService;
 use HsBremen\WebApi\Service\ProcessorCoolerService;
 use HsBremen\WebApi\Service\ProcessorService;
@@ -21,30 +22,37 @@ class Application extends Silex
 
 
         // Nutzt Pimple DI-Container: https://github.com/silexphp/Pimple/tree/1.1
-        $app['service.order'] = $app->share(function () {
-            return new OrderService();
+        $app['service.abstractResponse'] = $app->share(function () {
+            return new AbstractResponse();
         });
 
         $app['service.processor'] = $app->share(function () {
             return new ProcessorService();
         });
 
+        $app['service.order'] = $app->share(function () {
+            return new OrderService();
+        });
+
         $app['service.processorCooler'] = $app->share(function () {
             return new ProcessorCoolerService();
         });
+
+        //default Route (Informationen zum Projekt)
+        $this->get('/', 'service.abstractResponse:getWelcomeMessage');
+
+        // Processor Routen
+        $this->get('/processor', 'service.processor:getList');
+        $this->get('/processor/{id}', 'service.processor:getSingleProcessor');
+        $this->post('processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:addProcessor');
+        $this->put('/processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:updateProcessor');
+        $this->delete('/processor/{id}', 'service.processor:deleteProcessor');
 
         // Service Routen
         $this->get('/order', 'service.order:getList');
         $this->get('/order/{orderId}', 'service.order:getDetails');
         $this->post('/order', 'service.order:createOrder');
         $this->put('/order/{orderId}', 'service.order:changeOrder');
-
-
-        // Processor Routen
-        $this->get('/processor', 'service.processor:getList');
-        $this->get('/processor/{id}', 'service.processor:getSingleProcessor');
-        $this->put('/processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:updateProcessor');
-        $this->delete('/processor/{id}', 'service.processor:deleteProcessor');
 
         //Processor cooler Routen
         $this->get('/processorcooler', 'service.processorCooler:getList');
