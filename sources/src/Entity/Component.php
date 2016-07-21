@@ -26,7 +26,7 @@ class Component
     /**
      * @return mixed
      */
-    protected function getId()
+    public function getId()
     {
         return $this->id;
     }
@@ -34,7 +34,7 @@ class Component
     /**
      * @param mixed $id
      */
-    protected function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -42,7 +42,7 @@ class Component
     /**
      * @return mixed
      */
-    protected function getName()
+    public function getName()
     {
         return $this->name;
     }
@@ -50,7 +50,7 @@ class Component
     /**
      * @param mixed $name
      */
-    protected function setName($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -58,7 +58,7 @@ class Component
     /**
      * @return mixed
      */
-    protected function getPrice()
+    public function getPrice()
     {
         return $this->price;
     }
@@ -66,7 +66,7 @@ class Component
     /**
      * @param mixed $price
      */
-    protected function setPrice($price)
+    public function setPrice($price)
     {
         $this->price = $price;
     }

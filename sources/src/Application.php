@@ -46,6 +46,13 @@ class Application extends Silex
 
         //Processor cooler Routen
         $this->get('/processorcooler', 'service.processorCooler:getList');
+        $this->get('/processorcooler/{id}', 'service.processorCooler:getSingleProcessorCooler');
+        $this->post('/processorcooler/{id}/{$name}/{$price]/{$processorSocket}', 'service.processorCooler:addProcessorCooler');
+        //-> get noch nicht RouteNotFound
+        $this->put('/processorcooler/{id}/{$name}/{$price]/{$processorSocket}', 'service.processorCooler:updateProcessorCooler');
+        //-> get noch nicht RouteNotFound
+        $this->delete('/processorcooler/{id}', 'service.processorCooler:deleteProcessorCooler');
+
 
 
 
