@@ -51,7 +51,7 @@ class ComputerBodyDatabase extends AbstractDatabase
         return $this->computerBodyDatabase[$componentId];
     }
 
-    public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7)
+    public function updateComponent($param0, $param1, $param2, $param3, $param4 = null, $param5 = null, $param6 = null, $param7= null)
     {
         $this->computerBodyDatabase[$param0]->setName($param1);
         $this->computerBodyDatabase[$param0]->setPrice($param2);

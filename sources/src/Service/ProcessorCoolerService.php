@@ -25,9 +25,6 @@ class ProcessorCoolerService
     }
 
 
-    /**
-     * @return JsonResponse
-     */
     public function getList()
     {
         $listOfAllProcessorCoolers = new AbstractResponse();
@@ -35,7 +32,7 @@ class ProcessorCoolerService
             $listOfAllProcessorCoolers = $this->database->getDatabase();
             return new JsonResponse($listOfAllProcessorCoolers);
         }catch (\Exception $e){
-            $listOfAllProcessorCoolers->initResponse(ProcessorCoolerService::TAG, 0, "getList()", $e->getMessage());
+            $listOfAllProcessorCoolers->initResponse(ProcessorCoolerService::$TAG, 0, "getList()", $e->getMessage());
             return new JsonResponse($listOfAllProcessorCoolers);
         }
     }
