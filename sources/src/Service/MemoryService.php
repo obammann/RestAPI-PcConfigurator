@@ -35,7 +35,7 @@ class MemoryService
             return new JsonResponse($this->database->getComponent($id));
         }else{
             $getSingleMemoryResponse = new AbstractResponse();
-            $getSingleMemoryResponse->initResponse(ProcessorService::$TAG, $id, "getSingleMemory", "fail: no item found");
+            $getSingleMemoryResponse->initResponse(MemoryService::$TAG, $id, "getSingleMemory", "fail: no item found");
             return new JsonResponse($getSingleMemoryResponse->jsonSerialize());
         }
     }

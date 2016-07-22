@@ -36,7 +36,7 @@ class CdDriveService
             return new JsonResponse($this->database->getComponent($id));
         }else{
             $getSingleCdDriveResponse = new AbstractResponse();
-            $getSingleCdDriveResponse->initResponse(ProcessorService::$TAG, $id, "getSingleCdDrive()", "fail: no item found");
+            $getSingleCdDriveResponse->initResponse(CdDriveService::$TAG, $id, "getSingleCdDrive()", "fail: no item found");
             return new JsonResponse($getSingleCdDriveResponse->jsonSerialize());
         }
     }

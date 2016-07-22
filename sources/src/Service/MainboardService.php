@@ -36,7 +36,7 @@ class MainboardService
             return new JsonResponse($this->database->getComponent($id));
         }else{
             $getSingleMainboardResponse = new AbstractResponse();
-            $getSingleMainboardResponse->initResponse(ProcessorService::$TAG, $id, "getSingleMainboard()", "fail: no item found");
+            $getSingleMainboardResponse->initResponse(MemoryService::$TAG, $id, "getSingleMainboard()", "fail: no item found");
             return new JsonResponse($getSingleMainboardResponse->jsonSerialize());
         }
     }

@@ -36,7 +36,7 @@ class GraphicCardService
             return new JsonResponse($this->database->getComponent($id));
         }else{
             $getSingleGraphicCardResponse = new AbstractResponse();
-            $getSingleGraphicCardResponse->initResponse(ProcessorService::$TAG, $id, "getSingleGraphicCard", "fail: no item found");
+            $getSingleGraphicCardResponse->initResponse(GraphicCardService::$TAG, $id, "getSingleGraphicCard", "fail: no item found");
             return new JsonResponse($getSingleGraphicCardResponse->jsonSerialize());
         }
     }
