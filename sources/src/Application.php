@@ -22,10 +22,10 @@ class Application extends Silex
 
         $app = $this;
 
-
         // Nutzt Pimple DI-Container: https://github.com/silexphp/Pimple/tree/1.1
         $app['service.abstractResponse'] = $app->share(function () {
             return new AbstractResponse();
+
         });
 
         $app['service.processor'] = $app->share(function () {
@@ -48,28 +48,9 @@ class Application extends Silex
             return new ComputerBodyService();
         });
 
+        $routesManager = new RoutesManager();
+        $routesManager->initRoutes($this);
 
-
-        //default Route (Informationen zum Projekt)
-        $this->get('/', 'service.abstractResponse:getWelcomeMessage');
-
-        // Processor Routen
-        $this->get('/processor', 'service.processor:getList');
-        $this->get('/processor/{id}', 'service.processor:getSingleProcessor');
-        //add
-        $this->post('processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:addProcessor');
-        //update
-        $this->put('/processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}', 'service.processor:updateProcessor');
-        $this->delete('/processor/{id}', 'service.processor:deleteProcessor');
-
-        //ProcessorCooler Routen
-        $this->get('/processorCooler', 'service.processorCooler:getList');
-        $this->get('/processorCooler/{id}', 'service.processorCooler:getSingleProcessorCooler');
-        //add
-        $this->post('processorCooler/{id}/{name}/{price}/{processorSocket}', 'service.processorCooler:addProcessorCooler');
-        //update
-        $this->put('/processorCooler/{id}/{name}/{price}/{processorSocket}', 'service.processorCooler:updateProcessorCooler');
-        $this->delete('/processorCooler/{id}', 'service.processorCooler:deleteProcessorCooler');
 
         //PowerSupply Routen
         $this->get('/powersupply', 'service.powerSupply:getList');
@@ -79,25 +60,6 @@ class Application extends Silex
         $this->put('/powersupply/{id}/{$name}/{$price}/{$power}', 'service.powerSupply:updatePowerSupply');
         //-> get noch nicht RouteNotFound
         $this->delete('/powersupply/{id}', 'service.powerSupply:deletePowerSupply');
-
-        // HDD Routen
-        $this->get('/hdd', 'service.HDD:getList');
-        $this->get('/hdd/{id}', 'service.HDD:getSingleHDD');
-        //add
-        $this->post('/hdd/{id}/{name}/{price}/{type}/{memory}', 'service.HDD:addHDD');
-        //update
-        $this->put('/hdd/{id}/{name}/{price}/{type}/{memory}', 'service.HDD:updateHDD');
-        $this->delete('/hdd/{id}', 'service.HDD:deleteHDD');
-
-        // ComputerBody Routen
-        $this->get('/computerBody', 'service.computerBody:getList');
-        $this->get('/computerBody/{id}', 'service.computerBody:getSingleComputerBody');
-        //add
-        $this->post('/computerBody/{id}/{name}/{price}/{formFactor}', 'service.computerBody:addComputerBody');
-        //update
-        $this->put('/computerBody/{id}/{name}/{price}/{formFactor}', 'service.computerBody:updateComputerBody');
-        $this->delete('/computerBody/{id}', 'service.computerBody:deleteComputerBody');
-
 
 
 
