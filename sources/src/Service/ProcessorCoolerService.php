@@ -54,10 +54,10 @@ class ProcessorCoolerService
         $addProcessorCoolerResponse = new AbstractResponse();
         try{
             $this->database->addComponent(new ProcessorCooler($id,$name,$price,$processorSocket ));
-            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessor", "success");
+            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler", "success");
             return new JsonResponse($addProcessorCoolerResponse->jsonSerialize());
         }catch (\Exception $e){
-            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessor", $e->getMessage());
+            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler", $e->getMessage());
             return new JsonResponse($addProcessorCoolerResponse->jsonSerialize());
         }
     }
