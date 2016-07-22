@@ -117,7 +117,7 @@ class AbstractResponse implements \JsonSerializable
             'University'        => "Bremen University of Applied Sciences",
             'Team member_1'     => "Fabian Redecker (375750)",
             'Team member_2'     => "Christoph Schütte ()",
-            'Team member_3'     => "Oliver nachname ()",
+            'Team member_3'     => "Oliver Bammann (360330Matri)",
             'Team member_4'     => "Lennard Plog ()",
         ]);
     }
