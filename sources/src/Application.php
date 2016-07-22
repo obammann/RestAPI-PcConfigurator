@@ -3,6 +3,7 @@
 namespace HsBremen\WebApi;
 
 use HsBremen\WebApi\Service\AbstractResponse;
+use HsBremen\WebApi\Service\PowerSupplyService;
 use HsBremen\WebApi\Service\ProcessorCoolerService;
 use HsBremen\WebApi\Service\ProcessorService;
 use Silex\Application as Silex;
@@ -29,9 +30,12 @@ class Application extends Silex
             return new ProcessorService();
         });
 
-
         $app['service.processorCooler'] = $app->share(function () {
             return new ProcessorCoolerService();
+        });
+
+        $app['service.powerSupply'] = $app->share(function () {
+            return new PowerSupplyService();
         });
 
         //default Route (Informationen zum Projekt)
@@ -47,12 +51,20 @@ class Application extends Silex
         //Processor cooler Routen
         $this->get('/processorcooler', 'service.processorCooler:getList');
         $this->get('/processorcooler/{id}', 'service.processorCooler:getSingleProcessorCooler');
-        $this->post('/processorcooler/{id}/{$name}/{$price]/{$processorSocket}', 'service.processorCooler:addProcessorCooler');
+        $this->post('/processorcooler/{id}/{$name}/{$price}/{$processorSocket}', 'service.processorCooler:addProcessorCooler');
         //-> get noch nicht RouteNotFound
-        $this->put('/processorcooler/{id}/{$name}/{$price]/{$processorSocket}', 'service.processorCooler:updateProcessorCooler');
+        $this->put('/processorcooler/{id}/{$name}/{$price}/{$processorSocket}', 'service.processorCooler:updateProcessorCooler');
         //-> get noch nicht RouteNotFound
         $this->delete('/processorcooler/{id}', 'service.processorCooler:deleteProcessorCooler');
 
+        //PowerSupply Routen
+        $this->get('/powersupply', 'service.powerSupply:getList');
+        $this->get('/powersupply/{id}', 'service.powerSupply:getSinglePowerSupply');
+        $this->post('/powersupply/{id}/{$name}/{$price}/{$power}', 'service.powerSupply:addPowerSupply');
+        //-> get noch nicht RouteNotFound
+        $this->put('/powersupply/{id}/{$name}/{$price}/{$power}', 'service.powerSupply:updatePowerSupply');
+        //-> get noch nicht RouteNotFound
+        $this->delete('/powersupply/{id}', 'service.powerSupply:deletePowerSupply');
 
 
 

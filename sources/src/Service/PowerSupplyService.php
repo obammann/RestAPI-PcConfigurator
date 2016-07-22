@@ -10,6 +10,9 @@ namespace HsBremen\WebApi\Service;
 
 
 use HsBremen\WebApi\Entity\PowerSupply;
+use HsBremen\WebApi\Service\AbstractResponse;
+use HsBremen\WebApi\Database\PowerSupplyDatabase;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PowerSupplyService
 {
@@ -18,7 +21,7 @@ class PowerSupplyService
 
     public function __construct()
     {
-        $this->database = new PowerSupplyService();
+        $this->database = new PowerSupplyDatabase();
 
     }
 
