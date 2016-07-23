@@ -36,7 +36,7 @@ class GraphicCardService
             return new JsonResponse($this->database->getComponent($id));
         }else{
             $getSingleGraphicCardResponse = new AbstractResponse();
-            $getSingleGraphicCardResponse->initResponse(GraphicCardService::$TAG, $id, "getSingleGraphicCard", "fail: no item found");
+            $getSingleGraphicCardResponse->initResponse(GraphicCardService::$TAG, $id, "getSingleGraphicCard()", "fail: no item found");
             return new JsonResponse($getSingleGraphicCardResponse->jsonSerialize());
         }
     }
@@ -70,10 +70,10 @@ class GraphicCardService
         $deleteResponse = new AbstractResponse();
         try {
             $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteGraphicCard()", "success");
+            $deleteResponse->initResponse(GraphicCardService::$TAG , $id, "deleteGraphicCard()", "success");
             return new JsonResponse($deleteResponse->jsonSerialize());
         }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteGraphicCard()", $e->getMessage());
+            $deleteResponse->initResponse(GraphicCardService::$TAG , $id, "deleteGraphicCard()", $e->getMessage());
             return new JsonResponse($deleteResponse->jsonSerialize());
         }
     }

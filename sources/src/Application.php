@@ -3,8 +3,12 @@
 namespace HsBremen\WebApi;
 
 use HsBremen\WebApi\Service\AbstractResponse;
+use HsBremen\WebApi\Service\CdDriveService;
 use HsBremen\WebApi\Service\ComputerBodyService;
+use HsBremen\WebApi\Service\GraphicCardService;
 use HsBremen\WebApi\Service\HDDService;
+use HsBremen\WebApi\Service\MainboardService;
+use HsBremen\WebApi\Service\MemoryService;
 use HsBremen\WebApi\Service\PowerSupplyService;
 use HsBremen\WebApi\Service\ProcessorCoolerService;
 use HsBremen\WebApi\Service\ProcessorService;
@@ -40,28 +44,32 @@ class Application extends Silex
             return new PowerSupplyService();
         });
 
+        $app['service.memory'] = $app->share(function () {
+            return new MemoryService();
+        });
+
+        $app['service.mainboard'] = $app->share(function () {
+            return new MainboardService();
+        });
+
         $app['service.HDD'] = $app->share(function () {
             return new HDDService();
+        });
+
+        $app['service.graphicCard'] = $app->share(function () {
+            return new GraphicCardService();
         });
 
         $app['service.computerBody'] = $app->share(function () {
             return new ComputerBodyService();
         });
 
+        $app['service.cdDrive'] = $app->share(function () {
+            return new CdDriveService();
+        });
+
         $routesManager = new RoutesManager();
         $routesManager->initRoutes($this);
-
-
-        //PowerSupply Routen
-        $this->get('/powersupply', 'service.powerSupply:getList');
-        $this->get('/powersupply/{id}', 'service.powerSupply:getSinglePowerSupply');
-        $this->post('/powersupply/{id}/{$name}/{$price}/{$power}', 'service.powerSupply:addPowerSupply');
-        //-> get noch nicht RouteNotFound
-        $this->put('/powersupply/{id}/{$name}/{$price}/{$power}', 'service.powerSupply:updatePowerSupply');
-        //-> get noch nicht RouteNotFound
-        $this->delete('/powersupply/{id}', 'service.powerSupply:deletePowerSupply');
-
-
 
         // http://silex.sensiolabs.org/doc/cookbook/json_request_body.html
         $this->before(function (Request $request) use ($app) {

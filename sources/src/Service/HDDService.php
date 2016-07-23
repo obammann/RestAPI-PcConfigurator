@@ -26,8 +26,8 @@ class HDDService
 
     public function getList()
     {
-        $listOFAllProcessors = $this->database->getDatabase();
-        return new JsonResponse($listOFAllProcessors);
+        $listOFAllHDDs = $this->database->getDatabase();
+        return new JsonResponse($listOFAllHDDs);
     }
 
     public function getSingleHDD($id){
@@ -35,21 +35,21 @@ class HDDService
         if($this->database->getComponent($id) !== null){
             return new JsonResponse($this->database->getComponent($id));
         }else{
-            $getSingleProcessorResponse = new AbstractResponse();
-            $getSingleProcessorResponse->initResponse(ProcessorService::$TAG, $id, "getSingleHDD", "fail: no item found");
-            return new JsonResponse($getSingleProcessorResponse->jsonSerialize());
+            $getSingleHDDResponse = new AbstractResponse();
+            $getSingleHDDResponse->initResponse(HDDService::$TAG, $id, "getSingleHDD()", "fail: no item found");
+            return new JsonResponse($getSingleHDDResponse->jsonSerialize());
         }
     }
 
     public function addHDD($id, $name, $price, $type, $memory){
-        $addProcessorResponse = new AbstractResponse();
+        $addHDDResponse = new AbstractResponse();
         try{
             $this->database->addComponent(new HDD($id, $name, $price, $type, $memory));
-            $addProcessorResponse->initResponse($name, $id, "addHDD", "success");
-            return new JsonResponse($addProcessorResponse->jsonSerialize());
+            $addHDDResponse->initResponse($name, $id, "addHDD()", "success");
+            return new JsonResponse($addHDDResponse->jsonSerialize());
         }catch (\Exception $e){
-            $addProcessorResponse->initResponse($name, $id, "addHDD", $e->getMessage());
-            return new JsonResponse($addProcessorResponse->jsonSerialize());
+            $addHDDResponse->initResponse($name, $id, "addHDD()", $e->getMessage());
+            return new JsonResponse($addHDDResponse->jsonSerialize());
         }
     }
 
@@ -57,10 +57,10 @@ class HDDService
         $updateResponse = new AbstractResponse();
         try {
             $this->database->updateComponent($id, $name, $price, $type, $memory);
-            $updateResponse->initResponse($name, $id, "updateHDD", "success");
+            $updateResponse->initResponse($name, $id, "updateHDD()", "success");
             return new JsonResponse($updateResponse->jsonSerialize());
         }catch (\Exception $e){
-            $updateResponse->initResponse($name, $id, "updateHDD", + $e->getMessage() );
+            $updateResponse->initResponse($name, $id, "updateHDD()", + $e->getMessage() );
             return new JsonResponse($updateResponse->jsonSerialize());
         }
     }
@@ -69,10 +69,10 @@ class HDDService
         $deleteResponse = new AbstractResponse();
         try {
             $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteHDD", "success");
+            $deleteResponse->initResponse(HDDService::$TAG , $id, "deleteHDD", "success");
             return new JsonResponse($deleteResponse->jsonSerialize());
         }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteHDD", $e->getMessage());
+            $deleteResponse->initResponse(HDDService::$TAG , $id, "deleteHDD", $e->getMessage());
             return new JsonResponse($deleteResponse->jsonSerialize());
         }
     }

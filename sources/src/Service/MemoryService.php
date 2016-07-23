@@ -11,6 +11,7 @@ namespace HsBremen\WebApi\Service;
 
 use HsBremen\WebApi\Database\MemoryDatabase;
 use HsBremen\WebApi\Entity\Memory;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MemoryService
 {
@@ -35,7 +36,7 @@ class MemoryService
             return new JsonResponse($this->database->getComponent($id));
         }else{
             $getSingleMemoryResponse = new AbstractResponse();
-            $getSingleMemoryResponse->initResponse(MemoryService::$TAG, $id, "getSingleMemory", "fail: no item found");
+            $getSingleMemoryResponse->initResponse(MemoryService::$TAG, $id, "getSingleMemory()", "fail: no item found");
             return new JsonResponse($getSingleMemoryResponse->jsonSerialize());
         }
     }
@@ -45,10 +46,10 @@ class MemoryService
         $addMemoryResponse = new AbstractResponse();
         try{
             $this->database->addComponent(new Memory($id, $name, $price, $type, $module, $memory));
-            $addMemoryResponse->initResponse($name, $id, "addMemory", "success");
+            $addMemoryResponse->initResponse($name, $id, "addMemory()", "success");
             return new JsonResponse($addMemoryResponse->jsonSerialize());
         }catch (\Exception $e){
-            $addMemoryResponse->initResponse($name, $id, "addMemory", $e->getMessage());
+            $addMemoryResponse->initResponse($name, $id, "addMemory()", $e->getMessage());
             return new JsonResponse($addMemoryResponse->jsonSerialize());
         }
     }
@@ -69,10 +70,10 @@ class MemoryService
         $deleteResponse = new AbstractResponse();
         try {
             $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteMemory()", "success");
+            $deleteResponse->initResponse(MemoryService::$TAG , $id, "deleteMemory()", "success");
             return new JsonResponse($deleteResponse->jsonSerialize());
         }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteMemory()", $e->getMessage());
+            $deleteResponse->initResponse(MemoryService::$TAG , $id, "deleteMemory()", $e->getMessage());
             return new JsonResponse($deleteResponse->jsonSerialize());
         }
     }

@@ -36,7 +36,7 @@ class MainboardService
             return new JsonResponse($this->database->getComponent($id));
         }else{
             $getSingleMainboardResponse = new AbstractResponse();
-            $getSingleMainboardResponse->initResponse(MemoryService::$TAG, $id, "getSingleMainboard()", "fail: no item found");
+            $getSingleMainboardResponse->initResponse(MainboardService::$TAG, $id, "getSingleMainboard()", "fail: no item found");
             return new JsonResponse($getSingleMainboardResponse->jsonSerialize());
         }
     }
@@ -54,10 +54,10 @@ class MainboardService
         }
     }
 
-    public function updateMainboard($id, $name, $price, $processorSocket, $frequency, $cores){
+    public function updateMainboard($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots){
         $updateResponse = new AbstractResponse();
         try {
-            $this->database->updateComponent($id, $name, $price, $processorSocket, $frequency, $cores);
+            $this->database->updateComponent($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots);
             $updateResponse->initResponse($name, $id, "updateMainboard()", "success");
             return new JsonResponse($updateResponse->jsonSerialize());
         }catch (\Exception $e){
@@ -70,10 +70,10 @@ class MainboardService
         $deleteResponse = new AbstractResponse();
         try {
             $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteMainboard()", "success");
+            $deleteResponse->initResponse(MainboardService::$TAG , $id, "deleteMainboard()", "success");
             return new JsonResponse($deleteResponse->jsonSerialize());
         }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteMainboard()", $e->getMessage());
+            $deleteResponse->initResponse(MainboardService::$TAG , $id, "deleteMainboard()", $e->getMessage());
             return new JsonResponse($deleteResponse->jsonSerialize());
         }
     }

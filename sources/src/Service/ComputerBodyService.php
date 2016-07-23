@@ -24,8 +24,8 @@ class ComputerBodyService
 
     public function getList()
     {
-        $listOFAllProcessors = $this->database->getDatabase();
-        return new JsonResponse($listOFAllProcessors);
+        $listOFAllComputerBodies = $this->database->getDatabase();
+        return new JsonResponse($listOFAllComputerBodies);
     }
 
     public function getSingleComputerBody($id){
@@ -33,21 +33,21 @@ class ComputerBodyService
         if($this->database->getComponent($id) !== null){
             return new JsonResponse($this->database->getComponent($id));
         }else{
-            $getSingleProcessorResponse = new AbstractResponse();
-            $getSingleProcessorResponse->initResponse(ProcessorService::$TAG, $id, "getSingleComputerBody", "fail: no item found");
-            return new JsonResponse($getSingleProcessorResponse->jsonSerialize());
+            $getSingleComputerBodyResponse = new AbstractResponse();
+            $getSingleComputerBodyResponse->initResponse(ComputerBodyService::$TAG, $id, "getSingleComputerBody()", "fail: no item found");
+            return new JsonResponse($getSingleComputerBodyResponse->jsonSerialize());
         }
     }
 
     public function addComputerBody($id, $name, $price, $formFactor){
-        $addProcessorResponse = new AbstractResponse();
+        $addComputerBodyResponse = new AbstractResponse();
         try{
             $this->database->addComponent(new ComputerBody($id, $name, $price, $formFactor));
-            $addProcessorResponse->initResponse($name, $id, "addComputerBody", "success");
-            return new JsonResponse($addProcessorResponse->jsonSerialize());
+            $addComputerBodyResponse->initResponse($name, $id, "addComputerBody()", "success");
+            return new JsonResponse($addComputerBodyResponse->jsonSerialize());
         }catch (\Exception $e){
-            $addProcessorResponse->initResponse($name, $id, "addComputerBody", $e->getMessage());
-            return new JsonResponse($addProcessorResponse->jsonSerialize());
+            $addComputerBodyResponse->initResponse($name, $id, "addComputerBody()", $e->getMessage());
+            return new JsonResponse($addComputerBodyResponse->jsonSerialize());
         }
     }
 
@@ -55,10 +55,10 @@ class ComputerBodyService
         $updateResponse = new AbstractResponse();
         try {
             $this->database->updateComponent($id, $name, $price, $formFactor);
-            $updateResponse->initResponse($name, $id, "updateComputerBody", "success");
+            $updateResponse->initResponse($name, $id, "updateComputerBody()", "success");
             return new JsonResponse($updateResponse->jsonSerialize());
         }catch (\Exception $e){
-            $updateResponse->initResponse($name, $id, "updateComputerBody", + $e->getMessage());
+            $updateResponse->initResponse($name, $id, "updateComputerBody()", + $e->getMessage());
             return new JsonResponse($updateResponse->jsonSerialize());
         }
     }
@@ -67,10 +67,10 @@ class ComputerBodyService
         $deleteResponse = new AbstractResponse();
         try {
             $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteComputerBody", "success");
+            $deleteResponse->initResponse(ComputerBodyService::$TAG , $id, "deleteComputerBody()", "success");
             return new JsonResponse($deleteResponse->jsonSerialize());
         }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteComputerBody", $e->getMessage());
+            $deleteResponse->initResponse(ComputerBodyService::$TAG , $id, "deleteComputerBody()", $e->getMessage());
             return new JsonResponse($deleteResponse->jsonSerialize());
         }
     }

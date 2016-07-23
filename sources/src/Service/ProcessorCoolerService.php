@@ -42,7 +42,7 @@ class ProcessorCoolerService
         if($this->database->getComponent($id) !== null){
             return new JsonResponse($this->database->getComponent($id));
         }else{
-            $getSingleProcessorCoolerResponse->initResponse(ProcessorService::$TAG, $id, "getSingleProcessorCooler", "fail: no item found");
+            $getSingleProcessorCoolerResponse->initResponse(ProcessorCoolerService::$TAG, $id, "getSingleProcessorCooler()", "fail: no item found");
             return new JsonResponse($getSingleProcessorCoolerResponse->jsonSerialize());
         }
     }
@@ -51,10 +51,10 @@ class ProcessorCoolerService
         $addProcessorCoolerResponse = new AbstractResponse();
         try{
             $this->database->addComponent(new ProcessorCooler($id,$name,$price,$processorSocket ));
-            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler", "success");
+            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler()", "success");
             return new JsonResponse($addProcessorCoolerResponse->jsonSerialize());
         }catch (\Exception $e){
-            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler", $e->getMessage());
+            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler()", $e->getMessage());
             return new JsonResponse($addProcessorCoolerResponse->jsonSerialize());
         }
     }
@@ -78,7 +78,7 @@ class ProcessorCoolerService
             $deleteResponse->initResponse(ProcessorCoolerService::$TAG , $id, "deleteProcessorCooler()", "success");
             return new JsonResponse($deleteResponse->jsonSerialize());
         }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteProcessorCooler()", $e->getMessage());
+            $deleteResponse->initResponse(ProcessorCoolerService::$TAG , $id, "deleteProcessorCooler()", $e->getMessage());
             return new JsonResponse($deleteResponse->jsonSerialize());
         }
     }

@@ -42,7 +42,7 @@ class PowerSupplyService
         if($this->database->getComponent($id) !== null){
             return new JsonResponse($this->database->getComponent($id));
         }else{
-            $getSinglePowerSupplyResponse->initResponse(PowerSupplyService::$TAG, $id, "getSinglePowerSupply", "fail: no item found");
+            $getSinglePowerSupplyResponse->initResponse(PowerSupplyService::$TAG, $id, "getSinglePowerSupply()", "fail: no item found");
             return new JsonResponse($getSinglePowerSupplyResponse->jsonSerialize());
         }
     }
@@ -51,10 +51,10 @@ class PowerSupplyService
         $addPowerSupplyResponse = new AbstractResponse();
         try{
             $this->database->addComponent(new PowerSupply($id, $name, $price, $power));
-            $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply", "success");
+            $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply()", "success");
             return new JsonResponse($addPowerSupplyResponse->jsonSerialize());
         }catch (\Exception $e){
-            $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply", $e->getMessage());
+            $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply()", $e->getMessage());
             return new JsonResponse($addPowerSupplyResponse->jsonSerialize());
         }
     }

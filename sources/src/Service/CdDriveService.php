@@ -70,10 +70,10 @@ class CdDriveService
         $deleteResponse = new AbstractResponse();
         try {
             $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteCdDrive()", "success");
+            $deleteResponse->initResponse(CdDriveService::$TAG , $id, "deleteCdDrive()", "success");
             return new JsonResponse($deleteResponse->jsonSerialize());
         }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorService::$TAG , $id, "deleteCdDrive()", $e->getMessage());
+            $deleteResponse->initResponse(CdDriveService::$TAG , $id, "deleteCdDrive()", $e->getMessage());
             return new JsonResponse($deleteResponse->jsonSerialize());
         }
     }
