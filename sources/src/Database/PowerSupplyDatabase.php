@@ -16,6 +16,9 @@ class PowerSupplyDatabase extends AbstractDatabase
 
     private $powerSupplyDatabase;
 
+    /**
+     * PowerSupplyDatabase constructor.
+     */
     public function __construct()
     {
         $this->powerSupplyDatabase = [
@@ -32,16 +35,25 @@ class PowerSupplyDatabase extends AbstractDatabase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getDatabase()
     {
         return $this->powerSupplyDatabase;
     }
 
+    /**
+     * @param $database
+     */
     public function setDatabase($database)
     {
         $this->powerSupplyDatabase = $database;
     }
 
+    /**
+     * @param $newComponent
+     */
     public function addComponent($newComponent)
     {
         array_push($this->powerSupplyDatabase, $newComponent);
@@ -52,6 +64,16 @@ class PowerSupplyDatabase extends AbstractDatabase
         return $this->powerSupplyDatabase[$componentId];
     }
 
+    /**
+     * @param $param0
+     * @param $param1
+     * @param $param2
+     * @param $param3
+     * @param null $param4
+     * @param null $param5
+     * @param null $param6
+     * @param null $param7
+     */
     public function updateComponent($param0, $param1, $param2, $param3, $param4 = null, $param5 = null, $param6 = null, $param7 = null)
     {
         $this->powerSupplyDatabase[$param0]->setName($param1);
@@ -59,6 +81,9 @@ class PowerSupplyDatabase extends AbstractDatabase
         $this->powerSupplyDatabase[$param0]->setPower($param3);
     }
 
+    /**
+     * @param $componentId
+     */
     public function deleteComponent($componentId)
     {
         unset($this->powerSupplyDatabase[$componentId]);

@@ -12,10 +12,12 @@ namespace HsBremen\WebApi;
 class RoutesManager
 {
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
+    /**
+     * init all Routes
+     * @param $application
+     */
     public function initRoutes($application)
     {
         $this->initDefaultRoutes($application);
@@ -30,12 +32,18 @@ class RoutesManager
         $this->initCdDriveRoutes($application);
     }
 
+    /**
+     * @param $application
+     */
     private function initDefaultRoutes($application)
     {
         //default Route (Informationen zum Projekt)
         $application->get('/', 'service.abstractResponse:getWelcomeMessage');
     }
 
+    /**
+     * @param $application
+     */
     private function initProcessorRoutes($application)
     {
         // Processor Routen
@@ -48,6 +56,9 @@ class RoutesManager
         $application->delete('/processor/{id}', 'service.processor:deleteProcessor');
     }
 
+    /**
+     * @param $application
+     */
     private function initProcessorCoolerRoutes($application)
     {
         //ProcessorCooler Routen
@@ -60,6 +71,9 @@ class RoutesManager
         $application->delete('/processorcooler/{id}', 'service.processorCooler:deleteProcessorCooler');
     }
 
+    /**
+     * @param $application
+     */
     private function initPowerSupplyRoutes($application)
     {
         //PowerSupply Routen
@@ -72,6 +86,9 @@ class RoutesManager
         $application->delete('/powersupply/{id}', 'service.powerSupply:deletePowerSupply');
     }
 
+    /**
+     * @param $application
+     */
     private function initMemoryRoutes($application)
     {
         //Memory Routen
@@ -84,6 +101,9 @@ class RoutesManager
         $application->delete('/memory/{id}', 'service.memory:deleteMemory');
     }
 
+    /**
+     * @param $application
+     */
     private function initMainboardRoutes($application)
     {
         //Mainboard Routen
@@ -96,6 +116,9 @@ class RoutesManager
         $application->delete('/mainboard/{id}', 'service.mainboard:deleteMainboard');
     }
 
+    /**
+     * @param $application
+     */
     private function initHDDRoutes($application)
     {
         // HDD Routen
@@ -108,6 +131,9 @@ class RoutesManager
         $application->delete('/hdd/{id}', 'service.HDD:deleteHDD');
     }
 
+    /**
+     * @param $application
+     */
     private function initGraphicCardRoutes($application)
     {
         //Graphic Card Routen
@@ -120,6 +146,9 @@ class RoutesManager
         $application->delete('/graphiccard/{id}', 'service.graphicCard:deleteGraphicCard');
     }
 
+    /**
+     * @param $application
+     */
     private function initComputerBodyRoutes($application)
     {
         // ComputerBody Routen
@@ -132,6 +161,9 @@ class RoutesManager
         $application->delete('/computerbody/{id}', 'service.computerBody:deleteComputerBody');
     }
 
+    /**
+     * @param $application
+     */
     private function initCdDriveRoutes($application)
     {
         //CdDrive Routen

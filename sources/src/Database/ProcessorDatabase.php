@@ -17,6 +17,9 @@ class ProcessorDatabase extends AbstractDatabase
 
     private $processorDatabase;
 
+    /**
+     * ProcessorDatabase constructor.
+     */
     public function __construct()
     {
         $this->processorDatabase = [
@@ -33,26 +36,49 @@ class ProcessorDatabase extends AbstractDatabase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getDatabase()
     {
         return $this->processorDatabase;
     }
 
+    /**
+     * @param $database
+     */
     public function setDatabase($database)
     {
         $this->processorDatabase = $database;
     }
 
+    /**
+     * @param $newComponent
+     */
     public function addComponent($newComponent)
     {
         array_push($this->processorDatabase, $newComponent);
     }
 
+    /**
+     * @param $componentId
+     * @return mixed
+     */
     public function getComponent($componentId)
     {
         return $this->processorDatabase[$componentId];
     }
 
+    /**
+     * @param $param0
+     * @param $param1
+     * @param $param2
+     * @param $param3
+     * @param $param4
+     * @param $param5
+     * @param null $param6
+     * @param null $param7
+     */
     public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5 , $param6= null, $param7 = null)
     {
         $this->processorDatabase[$param0]->setName($param1);
@@ -62,6 +88,9 @@ class ProcessorDatabase extends AbstractDatabase
         $this->processorDatabase[$param0]->setCores($param5);
     }
 
+    /**
+     * @param $componentId
+     */
     public function deleteComponent($componentId)
     {
         unset($this->processorDatabase[$componentId]);
