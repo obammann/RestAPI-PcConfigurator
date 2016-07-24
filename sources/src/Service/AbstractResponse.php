@@ -22,6 +22,14 @@ class AbstractResponse implements \JsonSerializable
 
     public function __construct(){}
 
+    /**
+     * This class is used for response in case of some error.
+     * So the response will include the name, id, action(current method) & state(content of the error)
+     * @param $comName
+     * @param $comId
+     * @param $action
+     * @param $state
+     */
     public function initResponse($comName, $comId, $action, $state){
         $this->componentName = $comName;
         $this-> componentId = $comId;
@@ -110,15 +118,20 @@ class AbstractResponse implements \JsonSerializable
         $this->state = $state;
     }
 
+    /**
+     * welcome response for GET /
+     * @return JsonResponse
+     */
     public function getWelcomeMessage(){
 
         return new JsonResponse([
             'Welcome'           => "Willkommen zum RestApi-PCConfigurator",
+            'Course'            => "MI_REST_API_ENTWICKLUNG_2016",
             'University'        => "Bremen University of Applied Sciences",
-            'Team member_1'     => "Fabian Redecker (375750)",
+            'Team member_1'     => "Lennard Plog ()",
             'Team member_2'     => "Christoph Schütte ()",
             'Team member_3'     => "Oliver Bammann (360330)",
-            'Team member_4'     => "Lennard Plog ()",
+            'Team member_4'     => "Fabian Redecker (375750)",
         ]);
     }
 
