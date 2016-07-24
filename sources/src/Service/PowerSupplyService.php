@@ -17,14 +17,23 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class PowerSupplyService
 {
     private $database;
+    private $databaseSize;
     public  static $TAG = 'PowerSupplyService';
 
+    /**
+     * PowerSupplyService constructor.
+     */
     public function __construct()
     {
         $this->database = new PowerSupplyDatabase();
+        $this->databaseSize = count($this->database->getDatabase());
 
     }
 
+    /**
+     * GET /powersupply
+     * @return JsonResponse
+     */
     public function getList()
     {
         $listOfAllPowerSupplies = new AbstractResponse();
@@ -37,6 +46,11 @@ class PowerSupplyService
         }
     }
 
+    /**
+     * GET /powersupply/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     public function getSinglePowerSupply($id){
         $getSinglePowerSupplyResponse = new AbstractResponse();
         if($this->database->getComponent($id) !== null){
@@ -47,39 +61,77 @@ class PowerSupplyService
         }
     }
 
+    /**
+     * POST /powersupply/{id}/{name}/{price}/{power}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $power
+     * @return JsonResponse
+     */
     public function addPowerSupply($id, $name, $price, $power){
         $addPowerSupplyResponse = new AbstractResponse();
-        try{
-            $this->database->addComponent(new PowerSupply($id, $name, $price, $power));
-            $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply()", "success");
-            return new JsonResponse($addPowerSupplyResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply()", $e->getMessage());
-            return new JsonResponse($addPowerSupplyResponse->jsonSerialize());
+        if ($id > $this->databaseSize -1) {
+            try {
+                $this->database->addComponent(new PowerSupply($id, $name, $price, $power));
+                $addedElement = $this->database->getComponent($id);
+                $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply()", "success");
+                return new JsonResponse($addedElement, 200);
+            } catch (\Exception $e) {
+                $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply()", $e->getMessage());
+                return new JsonResponse($addPowerSupplyResponse->jsonSerialize());
+            }
+        }else{
+            $addPowerSupplyResponse->initResponse($name, $id, "addPowerSupply()", "id is already used");
+            return new JsonResponse($addPowerSupplyResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * PUT /powersupply/{id}/{name}/{price}/{power}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $power
+     * @return JsonResponse
+     */
     public function updatePowerSupply($id, $name, $price, $power){
         $updateResponse = new AbstractResponse();
-        try {
-            $this->database->updateComponent($id, $name, $price, $power);
-            $updateResponse->initResponse($name, $id, "updatePowerSupply()", "success");
-            return new JsonResponse($updateResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $updateResponse->initResponse($name, $id, "updatePowerSupply()", + $e->getMessage() );
-            return new JsonResponse($updateResponse->jsonSerialize());
+        if($id < $this->databaseSize) {
+            try {
+                $this->database->updateComponent($id, $name, $price, $power);
+                $updatedElement = $this->database->getComponent($id);
+                return new JsonResponse($updatedElement, 200);
+            } catch (\Exception $e) {
+                $updateResponse->initResponse($name, $id, "updatePowerSupply()", +$e->getMessage());
+                return new JsonResponse($updateResponse->jsonSerialize());
+            }
+        }else{
+            $updateResponse->initResponse($name,$id, "updatePowerSupply()", "Element id does not exist");
+            return new JsonResponse($updateResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * DELETE /powersupply/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     public function deletePowerSupply($id){
         $deleteResponse = new AbstractResponse();
-        try {
-            $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(PowerSupplyService::$TAG , $id, "deletePowerSupply()", "success");
-            return new JsonResponse($deleteResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $deleteResponse->initResponse(PowerSupplyService::$TAG , $id, "deletePowerSupply()", $e->getMessage());
-            return new JsonResponse($deleteResponse->jsonSerialize());
+        if ($id < $this->databaseSize) {
+            try {
+                $objectName = $this->database->getComponent($id)->getName();
+                $this->database->deleteComponent($id);
+                $deleteResponse->initResponse($objectName, $id, "deletePowerSupply()", "success");
+                return new JsonResponse($deleteResponse->jsonSerialize());
+            } catch (\Exception $e) {
+                $deleteResponse->initResponse(PowerSupplyService::$TAG, $id, "deletePowerSupply()", $e->getMessage());
+                return new JsonResponse($deleteResponse->jsonSerialize());
+            }
+        }else{
+            $deleteResponse->initResponse(PowerSupplyService::$TAG, $id, "deletePowerSupply()", "Element id does not exist");
+            return new JsonResponse($deleteResponse->jsonSerialize(), 406);
         }
     }
 

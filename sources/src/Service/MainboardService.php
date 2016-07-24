@@ -16,20 +16,33 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class MainboardService
 {
     private $database;
+    private $databaseSize;
     public  static $TAG = 'MainboardService';
 
+    /**
+     * MainboardService constructor.
+     */
     public function __construct()
     {
         $this->database = new MainboardDatabase();
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
+    /**
+     * GET /mainboard
+     * @return JsonResponse
+     */
     public function getList()
     {
         $listOFAllMainboards = $this->database->getDatabase();
         return new JsonResponse($listOFAllMainboards);
     }
 
-
+    /**
+     * GET /mainboard/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     public function getSingleMainboard($id){
 
         if($this->database->getComponent($id) !== null){
@@ -41,40 +54,84 @@ class MainboardService
         }
     }
 
-
+    /**
+     * POST /mainboard/{id}/{name}/{price}/{processorSocket}/{numberDDR3Slots}/{numberDDR4Slots}/{numberSataConnectors}/{numberPCIeSlots}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $processorSocket
+     * @param $numberDDR3Slots
+     * @param $numberDDR4Slots
+     * @param $numberSataConnectors
+     * @param $numberPCIeSlots
+     * @return JsonResponse
+     */
     public function addMainboard($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots){
         $addMainboardResponse = new AbstractResponse();
-        try{
-            $this->database->addComponent(new Mainboard($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots));
-            $addMainboardResponse->initResponse($name, $id, "addMainboard()", "success");
-            return new JsonResponse($addMainboardResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $addMainboardResponse->initResponse($name, $id, "addMainboard()", $e->getMessage());
-            return new JsonResponse($addMainboardResponse->jsonSerialize());
+        if ($id > $this->databaseSize -1) {
+            try {
+                $this->database->addComponent(new Mainboard($id, $name, $price, $processorSocket, $numberDDR3Slots, $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots));
+                $addedElement = $this->database->getComponent($id);
+                return new JsonResponse($addedElement, 200);
+            } catch (\Exception $e) {
+                $addMainboardResponse->initResponse($name, $id, "addMainboard()", $e->getMessage());
+                return new JsonResponse($addMainboardResponse->jsonSerialize());
+            }
+        }else{
+            $addMainboardResponse->initResponse($name, $id, "addMainboard()", "id is already used");
+            return new JsonResponse($addMainboardResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * PUT /mainboard/{id}/{name}/{price}/{processorSocket}/{numberDDR3Slots}/{numberDDR4Slots}/{numberSataConnectors}/{numberPCIeSlots}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $processorSocket
+     * @param $numberDDR3Slots
+     * @param $numberDDR4Slots
+     * @param $numberSataConnectors
+     * @param $numberPCIeSlots
+     * @return JsonResponse
+     */
     public function updateMainboard($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots){
         $updateResponse = new AbstractResponse();
-        try {
-            $this->database->updateComponent($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots);
-            $updateResponse->initResponse($name, $id, "updateMainboard()", "success");
-            return new JsonResponse($updateResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $updateResponse->initResponse($name, $id, "updateMainboard()", + $e->getMessage() );
-            return new JsonResponse($updateResponse->jsonSerialize());
+        if($id < $this->databaseSize) {
+            try {
+                $this->database->updateComponent($id, $name, $price, $processorSocket, $numberDDR3Slots, $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots);
+                $updatedElement = $this->database->getComponent($id);
+                return new JsonResponse($updatedElement, 200);
+            } catch (\Exception $e) {
+                $updateResponse->initResponse($name, $id, "updateMainboard()", +$e->getMessage());
+                return new JsonResponse($updateResponse->jsonSerialize());
+            }
+        }else{
+            $updateResponse->initResponse($name,$id, "updateMainboard()", "Element id does not exist");
+            return new JsonResponse($updateResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * DELETE /mainboard/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     public function deleteMainboard($id){
         $deleteResponse = new AbstractResponse();
-        try {
-            $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(MainboardService::$TAG , $id, "deleteMainboard()", "success");
-            return new JsonResponse($deleteResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $deleteResponse->initResponse(MainboardService::$TAG , $id, "deleteMainboard()", $e->getMessage());
-            return new JsonResponse($deleteResponse->jsonSerialize());
+        if ($id < $this->databaseSize) {
+            try {
+                $objectName = $this->database->getComponent($id)->getName();
+                $this->database->deleteComponent($id);
+                $deleteResponse->initResponse($objectName, $id, "deleteMainboard()", "success");
+                return new JsonResponse($deleteResponse->jsonSerialize());
+            } catch (\Exception $e) {
+                $deleteResponse->initResponse(MainboardService::$TAG, $id, "deleteMainboard()", $e->getMessage());
+                return new JsonResponse($deleteResponse->jsonSerialize());
+            }
+        }else{
+            $deleteResponse->initResponse(MainboardService::$TAG, $id, "deleteMainboard()", "Element id does not exist");
+            return new JsonResponse($deleteResponse->jsonSerialize(), 406);
         }
     }
 }

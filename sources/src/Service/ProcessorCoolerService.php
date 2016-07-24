@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ProcessorCoolerService
 {
     private $database;
+    private $databaseSize;
     public  static $TAG = 'ProcessorCoolerService';
 
     /**
@@ -24,6 +25,7 @@ class ProcessorCoolerService
     public function __construct()
     {
         $this->database = new ProcessorCoolerDatabase();
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
     /**
@@ -67,8 +69,7 @@ class ProcessorCoolerService
      */
     public function addProcessorCooler($id, $name, $price, $processorSocket){
         $addProcessorResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id > $databaseSize -1) {
+        if ($id > $this->databaseSize -1) {
             try {
                 $this->database->addComponent(new ProcessorCooler($id, $name, $price, $processorSocket));
                 $addedElement = $this->database->getComponent($id);
@@ -93,8 +94,7 @@ class ProcessorCoolerService
      */
     public function updateProcessorCooler($id, $name, $price, $processorSocket){
         $updateResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if($id < $databaseSize) {
+        if($id < $this->databaseSize) {
             try {
                 $this->database->updateComponent($id, $name, $price, $processorSocket);
                 $updatedElement = $this->database->getComponent($id);
@@ -116,8 +116,7 @@ class ProcessorCoolerService
      */
     public function deleteProcessorCooler($id){
         $deleteResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id < $databaseSize) {
+        if ($id < $this->databaseSize) {
             try {
                 $objectName = $this->database->getComponent($id)->getName();
                 $this->database->deleteComponent($id);

@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ProcessorService
 {
     private $database;
+    private $databaseSize;
     public static $TAG = 'ProcessorService';
 
     /**
@@ -24,6 +25,7 @@ class ProcessorService
     public function __construct()
     {
         $this->database = new ProcessorDatabase();
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
     /**
@@ -64,8 +66,7 @@ class ProcessorService
      */
     public function addProcessor($id, $name, $price, $processorSocket, $frequency, $cores){
         $addProcessorResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id > $databaseSize -1) {
+        if ($id > $this->databaseSize -1) {
             try {
                 $this->database->addComponent(new Processor($id, $name, $price, $processorSocket, $frequency, $cores));
                 $addedElement = $this->database->getComponent($id);
@@ -92,8 +93,7 @@ class ProcessorService
      */
     public function updateProcessor($id, $name, $price, $processorSocket, $frequency, $cores){
         $updateResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if($id < $databaseSize) {
+        if($id < $this->databaseSize) {
             try {
                 $this->database->updateComponent($id, $name, $price, $processorSocket, $frequency, $cores);
                 $updatedElement = $this->database->getComponent($id);
@@ -115,8 +115,7 @@ class ProcessorService
      */
     public function deleteProcessor($id){
         $deleteResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id < $databaseSize) {
+        if ($id < $this->databaseSize) {
             try {
                 $objectName = $this->database->getComponent($id)->getName();
                 $this->database->deleteComponent($id);

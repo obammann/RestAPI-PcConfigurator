@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class HDDService
 {
     private $database;
+    private $databaseSize;
     public static $TAG = 'HDDService';
 
     /**
@@ -24,7 +25,7 @@ class HDDService
     public function __construct()
     {
         $this->database = new HDDDatabase();
-
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
     /**
@@ -64,8 +65,7 @@ class HDDService
      */
     public function addHDD($id, $name, $price, $type, $memory){
         $addProcessorResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id > $databaseSize -1) {
+        if ($id > $this->databaseSize -1) {
             try {
                 $this->database->addComponent(new HDD($id, $name, $price, $type, $memory));
                 $addedElement = $this->database->getComponent($id);
@@ -91,8 +91,7 @@ class HDDService
      */
     public function updateHDD($id, $name, $price, $type, $memory){
         $updateResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if($id < $databaseSize) {
+        if($id < $this->databaseSize) {
             try {
                 $this->database->updateComponent($id, $name, $price, $type, $memory);
                 $updatedElement = $this->database->getComponent($id);
@@ -114,8 +113,7 @@ class HDDService
      */
     public function deleteHDD($id){
         $deleteResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id < $databaseSize) {
+        if ($id < $this->databaseSize) {
             try {
                 $objectName = $this->database->getComponent($id)->getName();
                 $this->database->deleteComponent($id);

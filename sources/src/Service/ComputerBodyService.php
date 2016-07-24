@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ComputerBodyService
 {
     private $database;
+    private $databaseSize;
     public static $TAG = 'ComputerBodyService';
 
     /**
@@ -23,6 +24,7 @@ class ComputerBodyService
     public function __construct()
     {
         $this->database = new ComputerBodyDatabase();
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
     /**
@@ -61,8 +63,7 @@ class ComputerBodyService
      */
     public function addComputerBody($id, $name, $price, $formFactor){
         $addProcessorResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id > $databaseSize -1) {
+        if ($id > $this->databaseSize -1) {
             try {
                 $this->database->addComponent(new ComputerBody($id, $name, $price, $formFactor));
                 $addedElement = $this->database->getComponent($id);
@@ -87,8 +88,7 @@ class ComputerBodyService
      */
     public function updateComputerBody($id, $name, $price, $formFactor){
         $updateResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if($id < $databaseSize) {
+        if($id < $this->databaseSize) {
             try {
                 $this->database->updateComponent($id, $name, $price, $formFactor);
                 $updatedElement = $this->database->getComponent($id);
@@ -110,8 +110,7 @@ class ComputerBodyService
      */
     public function deleteComputerBody($id){
         $deleteResponse = new AbstractResponse();
-        $databaseSize = sizeof($this->database->getDatabase());
-        if ($id < $databaseSize) {
+        if ($id < $this->databaseSize) {
             try {
                 $objectName = $this->database->getComponent($id)->getName();
                 $this->database->deleteComponent($id);
