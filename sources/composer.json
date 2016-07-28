@@ -17,7 +17,9 @@
     "autoload": {
         "psr-4": {
             "HsBremen\\WebApi\\": "src",
-            "HsBremen\\WebApi\\Tests\\": "tests"
+            "HsBremen\\WebApi\\tests\\": "tests",
+            "HsBremen\\WebApi\\Database\\": "database"
         }
+
     }
 }
