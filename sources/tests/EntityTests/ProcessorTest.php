@@ -9,12 +9,13 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
+    /*function test*/
     public function testjsonSerialize(){
         $processor = new Processor(10, 'test', 123, '3434', 123, 18);
         $this->assertNotEmpty($processor->jsonSerialize());
     }
 
+    /*Getter tests*/
     public function testGetId(){
         $processor = new Processor(10, 'test', 123, '3434', 123, 18);
         $this->assertEquals(10, $processor->getId());
@@ -46,6 +47,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(18, $processor->getCores());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $processor = new Processor(10, 'test', 123, '3434', 123, 18);
         $processor->setId(11);

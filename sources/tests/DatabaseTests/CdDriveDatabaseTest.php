@@ -9,25 +9,7 @@ class CdDriveDatabaseTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-    
-    public function testGetCdDriveDatabase(){
-        $cdDriveDatabase = new CdDriveDatabase();
-        $this -> assertNotEmpty($cdDriveDatabase->getDatabase());
-    }
-
-
-    public function testSetDatabase(){
-        $cdDriveDatabase = new CdDriveDatabase();
-        $database = [1,2,3];
-        $cdDriveDatabase->setDatabase($database);
-        $this-> assertContains(2, $cdDriveDatabase->getDatabase());
-    }
-
-    public function testGetComponent(){
-        $cdDriveDatabase = new CdDriveDatabase();
-        $this -> assertNotEmpty($cdDriveDatabase->getComponent(2));
-    }
-
+    /*function tests*/
     public function testAddComponent(){
         $cdDriveDatabase = new CdDriveDatabase();
         $cdDriveDatabase->addComponent(10, 'test', 123, 12, 1234, false,true);
@@ -45,4 +27,26 @@ class CdDriveDatabaseTest extends \PHPUnit_Framework_TestCase {
         $cdDriveDatabase = new CdDriveDatabase();
         $this -> assertEmpty($cdDriveDatabase->deleteComponent(1));
     }
+
+    /*getter tests*/
+    public function testGetCdDriveDatabase(){
+        $cdDriveDatabase = new CdDriveDatabase();
+        $this -> assertNotEmpty($cdDriveDatabase->getDatabase());
+    }
+
+    public function testGetComponent(){
+        $cdDriveDatabase = new CdDriveDatabase();
+        $this -> assertNotEmpty($cdDriveDatabase->getComponent(2));
+    }
+
+    /*setter tests*/
+    public function testSetDatabase(){
+        $cdDriveDatabase = new CdDriveDatabase();
+        $database = [1,2,3];
+        $cdDriveDatabase->setDatabase($database);
+        $this-> assertContains(2, $cdDriveDatabase->getDatabase());
+    }
+
+
+
 }

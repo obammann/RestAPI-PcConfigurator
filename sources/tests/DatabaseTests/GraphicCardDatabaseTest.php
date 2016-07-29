@@ -9,25 +9,7 @@ class GraphicCardDatabaseTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
-    public function testGetgraphicCardDatabase(){
-        $graphicCardDatabase = new GraphicCardDatabase();
-        $this -> assertNotEmpty($graphicCardDatabase->getDatabase());
-    }
-
-
-    public function testSetDatabase(){
-        $graphicCardDatabase = new GraphicCardDatabase();
-        $database = [1,2,3];
-        $graphicCardDatabase->setDatabase($database);
-        $this-> assertContains(2, $graphicCardDatabase->getDatabase());
-    }
-
-    public function testGetComponent(){
-        $graphicCardDatabase = new GraphicCardDatabase();
-        $this -> assertNotEmpty($graphicCardDatabase->getComponent(2));
-    }
-
+    /*function tests*/
     public function testAddComponent(){
         $graphicCardDatabase = new GraphicCardDatabase();
         $graphicCardDatabase->addComponent(10,"test", 123, 4, 2);
@@ -45,4 +27,27 @@ class GraphicCardDatabaseTest extends \PHPUnit_Framework_TestCase {
         $graphicCardDatabase = new GraphicCardDatabase();
         $this -> assertEmpty($graphicCardDatabase->deleteComponent(1));
     }
+
+    /*getter tests*/
+    public function testGetGraphicCardDatabase(){
+        $graphicCardDatabase = new GraphicCardDatabase();
+        $this -> assertNotEmpty($graphicCardDatabase->getDatabase());
+    }
+
+    public function testGetComponent(){
+        $graphicCardDatabase = new GraphicCardDatabase();
+        $this -> assertNotEmpty($graphicCardDatabase->getComponent(2));
+    }
+
+    /*setter tests*/
+    public function testSetDatabase(){
+        $graphicCardDatabase = new GraphicCardDatabase();
+        $database = [1,2,3];
+        $graphicCardDatabase->setDatabase($database);
+        $this-> assertContains(2, $graphicCardDatabase->getDatabase());
+    }
+
+
+
+
 }

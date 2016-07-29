@@ -9,12 +9,13 @@ class MainboardTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
+    /*function test*/
     public function testjsonSerialize(){
         $mainboard = new Mainboard(10,"test",200.00,"test1",1,2,3,4);
         $this->assertNotEmpty($mainboard->jsonSerialize());
     }
 
+    /*getter tests*/
     public function testGetId(){
         $mainboard = new Mainboard(10,"test",200.00,"test1",1,2,3,4);
         $this->assertEquals(10, $mainboard->getId());
@@ -55,6 +56,7 @@ class MainboardTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(4, $mainboard->getNumberPCIeSlots());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $mainboard = new Mainboard(10,"test",200.00,"test1",1,2,3,4);
         $mainboard->setId(11);

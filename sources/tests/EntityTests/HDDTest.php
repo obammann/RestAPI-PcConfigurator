@@ -9,12 +9,13 @@ class HDDTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
+    /*function test*/
     public function testjsonSerialize(){
         $hdd = new HDD(0,'test',3232,'test1', 23);
         $this->assertNotEmpty($hdd->jsonSerialize());
     }
 
+    /*getter tests*/
     public function testGetId(){
         $hdd = new HDD(10,'test',3232,'test1', 23);
         $this->assertEquals(10, $hdd->getId());
@@ -40,6 +41,7 @@ class HDDTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(23, $hdd->getMemory());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $hdd = new HDD(0,'test',3232,'test1', 23);
         $hdd->setId(11);

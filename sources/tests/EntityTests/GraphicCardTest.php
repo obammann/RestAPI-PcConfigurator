@@ -10,11 +10,13 @@ class GraphicCardTest extends \PHPUnit_Framework_TestCase {
      */
 
 
+    /*function test*/
     public function testjsonSerialize(){
         $graphicCard = new GraphicCard(10,"TestForce", 4929, 22, 28);
         $this->assertNotEmpty($graphicCard->jsonSerialize());
     }
 
+    /*getter tests*/
     public function testGetId(){
         $graphicCard = new GraphicCard(10,"TestForce", 4929, 22, 28);
         $this->assertEquals(10, $graphicCard->getId());
@@ -40,6 +42,7 @@ class GraphicCardTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(28, $graphicCard->getMemory());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $graphicCard = new GraphicCard(10,"TestForce", 4929, 22, 28);
         $graphicCard->setId(11);

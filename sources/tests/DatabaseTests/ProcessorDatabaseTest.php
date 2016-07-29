@@ -10,26 +10,7 @@ class ProcessorDatabaseTest extends \PHPUnit_Framework_TestCase {
    */
 
 
-  
-
-  public function testGetProcessorDatabase(){
-    $processorDatabase = new ProcessorDatabase();
-    $this -> assertNotEmpty($processorDatabase->getDatabase());
-  }
-
-  
-  public function testSetDatabase(){
-    $processorDatabase = new ProcessorDatabase();
-    $database = [1,2,3];
-    $processorDatabase->setDatabase($database);
-    $this-> assertContains(2, $processorDatabase->getDatabase());
-  }
-
-  public function testGetComponent(){
-    $processorDatabase = new ProcessorDatabase();
-    $this -> assertNotEmpty($processorDatabase->getComponent(2));
-  }
-
+  /*function tests*/
   public function testAddComponent(){
     $processorDatabase = new ProcessorDatabase();
     $processorDatabase->addComponent(10, 'test', 123, 'test4', 1234, 1);
@@ -47,5 +28,26 @@ class ProcessorDatabaseTest extends \PHPUnit_Framework_TestCase {
     $processorDatabase = new ProcessorDatabase();
     $this -> assertEmpty($processorDatabase->deleteComponent(1));
   }
+
+  /*getter tests*/
+  public function testGetProcessorDatabase(){
+    $processorDatabase = new ProcessorDatabase();
+    $this -> assertNotEmpty($processorDatabase->getDatabase());
+  }
+
+  public function testGetComponent(){
+    $processorDatabase = new ProcessorDatabase();
+    $this -> assertNotEmpty($processorDatabase->getComponent(2));
+  }
+
+  /*setter tests*/
+  public function testSetDatabase(){
+    $processorDatabase = new ProcessorDatabase();
+    $database = [1,2,3];
+    $processorDatabase->setDatabase($database);
+    $this-> assertContains(2, $processorDatabase->getDatabase());
+  }
+
+
   
 }

@@ -16,12 +16,14 @@ class CdDriveTest extends \PHPUnit_Framework_TestCase {
         $cdDrive = new CdDrive(10,"LG BH16NS55",69.90, 12, 16, true , true );
         $this->assertNotEmpty($cdDrive->jsonSerialize());
     }
-    
+
+    /*function test*/
     public function testGetId(){
         $cdDrive = new CdDrive(10,"LG BH16NS55",69.90, 12, 16, true , true );
         $this->assertEquals(10, $cdDrive->getId());
     }
 
+    /*getter tests*/
     public function testGetName(){
         $cdDrive = new CdDrive(10,"LG BH16NS55",69.90, 12, 16, true , true );
         $this->assertEquals('LG BH16NS55', $cdDrive->getName());
@@ -52,6 +54,7 @@ class CdDriveTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(16, $cdDrive->getWritingTime());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $cdDrive = new CdDrive(10,"LG BH16NS55",69.90, 12, 16, true , true );
         $cdDrive->setId(11);

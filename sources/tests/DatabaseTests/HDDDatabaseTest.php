@@ -9,25 +9,7 @@ class HDDDatabaseTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
-    public function testGetHDDDatabase(){
-        $hddDatabase = new HDDDatabase();
-        $this -> assertNotEmpty($hddDatabase->getDatabase());
-    }
-
-
-    public function testSetDatabase(){
-        $hddDatabase = new HDDDatabase();
-        $database = [1,2,3];
-        $hddDatabase->setDatabase($database);
-        $this-> assertContains(2, $hddDatabase->getDatabase());
-    }
-
-    public function testGetComponent(){
-        $hddDatabase = new HDDDatabase();
-        $this -> assertNotEmpty($hddDatabase->getComponent(2));
-    }
-
+    /*function tests*/
     public function testAddComponent(){
         $hddDatabase = new HDDDatabase();
         $hddDatabase->addComponent(10,"test", 23, "test", 23);
@@ -45,4 +27,27 @@ class HDDDatabaseTest extends \PHPUnit_Framework_TestCase {
         $hddDatabase = new HDDDatabase();
         $this -> assertEmpty($hddDatabase->deleteComponent(1));
     }
+
+    /*getter tests*/
+    public function testGetHDDDatabase(){
+        $hddDatabase = new HDDDatabase();
+        $this -> assertNotEmpty($hddDatabase->getDatabase());
+    }
+
+    public function testGetComponent(){
+        $hddDatabase = new HDDDatabase();
+        $this -> assertNotEmpty($hddDatabase->getComponent(2));
+    }
+
+    /*setter tests*/
+    public function testSetDatabase(){
+        $hddDatabase = new HDDDatabase();
+        $database = [1,2,3];
+        $hddDatabase->setDatabase($database);
+        $this-> assertContains(2, $hddDatabase->getDatabase());
+    }
+
+  
+
+
 }

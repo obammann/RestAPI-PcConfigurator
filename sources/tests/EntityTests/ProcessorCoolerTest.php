@@ -9,12 +9,13 @@ class processorCoolerTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
+    /*function test*/
     public function testjsonSerialize(){
         $processorCooler = new ProcessorCooler(10,"test", 100,"test1");
         $this->assertNotEmpty($processorCooler->jsonSerialize());
     }
 
+    /*getter tests*/
     public function testGetId(){
         $processorCooler = new ProcessorCooler(10,"test", 100,"test1");
         $this->assertEquals(10, $processorCooler->getId());
@@ -35,7 +36,7 @@ class processorCoolerTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('test1', $processorCooler->getProcessorSocket());
     }
 
-
+    /*setter tests*/
     public function testSetId(){
         $processorCooler = new ProcessorCooler(10,"test", 100,"test1");
         $processorCooler->setId(11);

@@ -9,12 +9,13 @@ class PowerSupplyTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
+    /*function test*/
     public function testjsonSerialize(){
         $powerSupply = new PowerSupply(10, "test" ,20, 30);
         $this->assertNotEmpty($powerSupply->jsonSerialize());
     }
 
+    /*getter tests*/
     public function testGetId(){
         $powerSupply = new PowerSupply(10, "test" ,20, 30);
         $this->assertEquals(10, $powerSupply->getId());
@@ -35,6 +36,7 @@ class PowerSupplyTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(30, $powerSupply->getPower());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $powerSupply = new PowerSupply(10, "test" ,20, 30);
         $powerSupply->setId(11);

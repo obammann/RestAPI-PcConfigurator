@@ -9,12 +9,13 @@ class MemoryTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
+    /*function test*/
     public function testjsonSerialize(){
         $memory = new Memory(10,"test", 70, "test1", 1, 2);
         $this->assertNotEmpty($memory->jsonSerialize());
     }
 
+    /*getter tests*/
     public function testGetId(){
         $memory = new Memory(10,"test", 70, "test1", 1, 2);
         $this->assertEquals(10, $memory->getId());
@@ -45,6 +46,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(2, $memory->getMemory());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $memory = new Memory(10,"test", 70, "test1", 1, 2);
         $memory->setId(11);

@@ -9,12 +9,13 @@ class ComputerBodyTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-    
+    /*function test*/
     public function testjsonSerialize(){
         $computerBody = new ComputerBody(10,"test",69.90, 'test2');
         $this->assertNotEmpty($computerBody->jsonSerialize());
     }
 
+    /*getter tests*/
     public function testGetId(){
         $computerBody = new ComputerBody(10,"test",69.90, 'test2');
         $this->assertEquals(10, $computerBody->getId());
@@ -35,6 +36,7 @@ class ComputerBodyTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('test2', $computerBody->getFormFactor());
     }
 
+    /*setter tests*/
     public function testSetId(){
         $computerBody = new ComputerBody(10,"test",69.90, 'test2');
         $computerBody->setId(11);

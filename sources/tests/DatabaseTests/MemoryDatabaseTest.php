@@ -9,25 +9,7 @@ class MemoryDatabaseTest extends \PHPUnit_Framework_TestCase {
      * @test
      */
 
-
-    public function testGetHDDDDatabase(){
-        $memoryDatabase = new MemoryDatabase();
-        $this -> assertNotEmpty($memoryDatabase->getDatabase());
-    }
-
-
-    public function testSetDatabase(){
-        $memoryDatabase = new MemoryDatabase();
-        $database = [1,2,3];
-        $memoryDatabase->setDatabase($database);
-        $this-> assertContains(2, $memoryDatabase->getDatabase());
-    }
-
-    public function testGetComponent(){
-        $memoryDatabase = new MemoryDatabase();
-        $this -> assertNotEmpty($memoryDatabase->getComponent(2));
-    }
-
+    /*function tests*/
     public function testAddComponent(){
         $memoryDatabase = new MemoryDatabase();
         $memoryDatabase->addComponent(10,"test", 76, "ddr25", 2, 16);
@@ -45,4 +27,27 @@ class MemoryDatabaseTest extends \PHPUnit_Framework_TestCase {
         $memoryDatabase = new MemoryDatabase();
         $this -> assertEmpty($memoryDatabase->deleteComponent(1));
     }
+
+    /*getter tests*/
+    public function testGetHDDDDatabase(){
+        $memoryDatabase = new MemoryDatabase();
+        $this -> assertNotEmpty($memoryDatabase->getDatabase());
+    }
+
+    public function testGetComponent(){
+        $memoryDatabase = new MemoryDatabase();
+        $this -> assertNotEmpty($memoryDatabase->getComponent(2));
+    }
+
+    /*setter tests*/
+    public function testSetDatabase(){
+        $memoryDatabase = new MemoryDatabase();
+        $database = [1,2,3];
+        $memoryDatabase->setDatabase($database);
+        $this-> assertContains(2, $memoryDatabase->getDatabase());
+    }
+
+
+
+
 }
