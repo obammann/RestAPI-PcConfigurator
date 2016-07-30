@@ -8,9 +8,16 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="ProcessorCooler"))
+ */
 class ProcessorCooler extends Component implements \JsonSerializable
 {
+
+    /**
+     * @SWG\Property()
+     * @var string
+     */
     private $processorSocket;
 
 

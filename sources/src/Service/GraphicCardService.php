@@ -23,12 +23,72 @@ class GraphicCardService
         $this->database = new GraphicCardDatabase();
     }
 
+
+    /**
+     * @SWG\Get(
+     *     path="/graphiccard/getList",
+     *     summary="Finds all graphic cards",
+     *     tags={"graphic card", "List"},
+     *     description="...",
+     *     operationId="getGraphicCardList",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/GraphicCard")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
+
     public function getList()
     {
         $listOFAllGraphicCards = $this->database->getDatabase();
         return new JsonResponse($listOFAllGraphicCards);
     }
 
+
+    /**
+     * @SWG\Get(
+     *     path="/graphiccard/{id}",
+     *     summary="Find Graphic card by ID",
+     *     description="Returns a single Graphic card",
+     *     operationId="getGraphicCardByID",
+     *     tags={"graphic Card"},
+     *     consumes={
+     *         "application/json"
+     *     },
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of graphic card to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/GraphicCard")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Graphic Card not found"
+     *     )
+     * )
+     */
 
     public function getSingleGraphicCard($id){
 

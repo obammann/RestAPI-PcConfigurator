@@ -25,6 +25,30 @@ class ProcessorCoolerService
     }
 
 
+    /**
+     * @SWG\Get(
+     *     path="/processorcooler/getList",
+     *     summary="Finds all processor coolers",
+     *     tags={"processor cooler", "List"},
+     *     description="...",
+     *     operationId="getProcessorCoolerList",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/ProcessorCooler")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
+
     public function getList()
     {
         $listOfAllProcessorCoolers = new AbstractResponse();
@@ -36,6 +60,42 @@ class ProcessorCoolerService
             return new JsonResponse($listOfAllProcessorCoolers);
         }
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/processorcooler/{id}",
+     *     summary="Find processor cooler by ID",
+     *     description="Returns a single processor cooler",
+     *     operationId="getProcessorCoolerByID",
+     *     tags={"processor cooler"},
+     *     consumes={
+     *         "application/json",
+     *         "application/x-www-form-urlencoded"
+     *     },
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of processor cooler to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/ProcessorCooler")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Processor not found"
+     *     )
+     * )
+     */
 
     public function getSingleProcessorCooler($id){
         $getSingleProcessorCoolerResponse = new AbstractResponse();

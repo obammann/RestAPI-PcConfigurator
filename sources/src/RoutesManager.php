@@ -143,4 +143,6 @@ class RoutesManager
         $application->put('/cddrive/{id}/{name}/{price}/{readingTime}/{writingTime}/{isWritable}/{isBluRay}', 'service.cdDrive:updateCdDrive');
         $application->delete('/cddrive/{id}', 'service.cdDrive:deleteCdDrive');
     }
+
+
 }

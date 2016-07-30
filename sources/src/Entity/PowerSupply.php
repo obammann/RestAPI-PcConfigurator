@@ -8,10 +8,15 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="PowerSupply"))
+ */
 class PowerSupply extends Component implements \JsonSerializable
 {
-
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $power;
 
 

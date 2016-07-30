@@ -24,11 +24,72 @@ class HDDService
 
     }
 
+
+    /**
+     * @SWG\Get(
+     *     path="/hdd/getList",
+     *     summary="Finds all HDDs",
+     *     tags={"HDD", "List"},
+     *     description="...",
+     *     operationId="getHDDList",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/HDD")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
+
     public function getList()
     {
         $listOFAllHDDs = $this->database->getDatabase();
         return new JsonResponse($listOFAllHDDs);
     }
+
+
+    /**
+     * @SWG\Get(
+     *     path="/hdd/{id}",
+     *     summary="Find HDD by ID",
+     *     description="Returns a single HDD",
+     *     operationId="getHDDByID",
+     *     tags={"HDD"},
+     *     consumes={
+     *         "application/json"
+     *     },
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of HDD to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/HDD")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="HDD not found"
+     *     )
+     * )
+     */
 
     public function getSingleHDD($id){
 

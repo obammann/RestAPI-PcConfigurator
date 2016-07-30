@@ -9,10 +9,29 @@
 namespace HsBremen\WebApi\Entity;
 
 
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="Processor"))
+ */
+
 class Processor extends Component implements \JsonSerializable
 {
+
+    /**
+     * @SWG\Property()
+     * @var string
+     */
     private $processorSocket;
+
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $frequency;
+
+    /**
+     * @SWG\Property(format="int64")
+     * @var int
+     */
     private $cores;
 
 

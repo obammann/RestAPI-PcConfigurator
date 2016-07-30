@@ -8,11 +8,25 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="Memory"))
+ */
 class Memory extends Component implements \JsonSerializable
 {
+    /**
+     * @SWG\Property()
+     * @var string
+     */
     private $type;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $module;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $memory;
 
 

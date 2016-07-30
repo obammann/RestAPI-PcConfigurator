@@ -22,11 +22,72 @@ class ComputerBodyService
         $this->database = new ComputerBodyDatabase();
     }
 
+
+    /**
+     * @SWG\Get(
+     *     path="/computerbody/getList",
+     *     summary="Finds all computer bodies",
+     *     tags={"computer body", "List"},
+     *     description="...",
+     *     operationId="getComputerBodyList",
+     *     consumes={"application/xml", "application/json"},
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/ComputerBody")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
+
     public function getList()
     {
         $listOFAllComputerBodies = $this->database->getDatabase();
         return new JsonResponse($listOFAllComputerBodies);
     }
+
+
+    /**
+     * @SWG\Get(
+     *     path="/computerbody/{id}",
+     *     summary="Find computer body by ID",
+     *     description="Returns a single computer body",
+     *     operationId="getComputerBodyByID",
+     *     tags={"computer body"},
+     *     consumes={
+     *         "application/json"
+     *     },
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of computer body to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/ComputerBody")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Computer body not found"
+     *     )
+     * )
+     */
 
     public function getSingleComputerBody($id){
 

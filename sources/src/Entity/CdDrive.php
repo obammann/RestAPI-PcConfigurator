@@ -8,13 +8,32 @@
 
 namespace HsBremen\WebApi\Entity;
 
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="CdDrive"))
+ */
 
-class CdDrive extends Component implements \JsonSerializable
+class CdDrive     extends Component implements \JsonSerializable
 {
 
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $readingTime;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $writingTime;
+    /**
+     * @SWG\Property()
+     * @var boolean
+     */
     private $isWritable;
+    /**
+     * @SWG\Property()
+     * @var boolean
+     */
     private $isBluRay;
 
     public function __construct($id, $name, $price, $readingTime, $writingTime, $isWritable, $isBluRay  )

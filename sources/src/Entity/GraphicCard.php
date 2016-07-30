@@ -8,10 +8,20 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="GraphicCard"))
+ */
 class GraphicCard extends Component implements \JsonSerializable
 {
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $slotsOccupied;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $memory;
 
 

@@ -18,10 +18,37 @@ class ProcessorService
     private $database;
     public static $TAG = 'ProcessorService';
 
+
+
+
     public function __construct()
     {
         $this->database = new ProcessorDatabase();
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/processor/getList",
+     *     summary="Finds all processors",
+     *     tags={"Processor", "List"},
+     *     description="...",
+     *     operationId="getProcessorList",
+     *     consumes={"application/xml", "application/json"},
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/Processor")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
 
     public function getList()
     {
@@ -29,6 +56,43 @@ class ProcessorService
         return new JsonResponse($listOFAllProcessors);
     }
 
+
+    /**
+     * @SWG\Get(
+     *     path="/processor/{id}",
+     *     summary="Find processor by ID",
+     *     description="Returns a single processor",
+     *     operationId="getProcessorByID",
+     *     tags={"processor"},
+     *     consumes={
+     *         "application/xml",
+     *         "application/json",
+     *         "application/x-www-form-urlencoded"
+     *     },
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of processor to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/Processor")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Processor not found"
+     *     )
+     * )
+     */
 
     public function getSingleProcessor($id){
 

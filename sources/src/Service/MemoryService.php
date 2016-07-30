@@ -23,12 +23,71 @@ class MemoryService
         $this->database = new MemoryDatabase();
     }
 
+    /**
+     * @SWG\Get(
+     *     path="/memory/getList",
+     *     summary="Finds all memories",
+     *     tags={"Memory", "List"},
+     *     description="...",
+     *     operationId="getMemoryList",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/Memory")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
+
     public function getList()
     {
         $listOFAllMemories = $this->database->getDatabase();
         return new JsonResponse($listOFAllMemories);
     }
 
+
+    /**
+     * @SWG\Get(
+     *     path="/memory/{id}",
+     *     summary="Find Memory by ID",
+     *     description="Returns a single memory",
+     *     operationId="getMemoryByID",
+     *     tags={"memory"},
+     *     consumes={
+     *         "application/json"
+     *     },
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of memory to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/Memory")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Memory not found"
+     *     )
+     * )
+     */
 
     public function getSingleMemory($id){
 

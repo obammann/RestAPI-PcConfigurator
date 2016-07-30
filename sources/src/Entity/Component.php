@@ -8,16 +8,33 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(@SWG\XmL(name="Component"))
+ */
 class Component
 {
+    /**
+     * @SWG\Property(format="int64")
+     * @var int
+     */
     protected $id;
+
+    /**
+     * @SWG\Property(example="Test")
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @SWG\Property(format="double")
+     * @var Double
+     */
     protected $price;
 
 
     public function __construct($id, $name, $price)
     {
+
         $this->id = id;
         $this->name = name;
         $this->price = $price;

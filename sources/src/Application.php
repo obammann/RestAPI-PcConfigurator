@@ -17,6 +17,15 @@ use Silex\Provider\ServiceControllerServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 
+/**
+ * @SWG\Swagger(
+ *   @SWG\Info(
+ *     title="Computer-Konfigurator API",
+ *     version="0.1"
+ *   )
+ * )
+ */
+
 class Application extends Silex
 {
     public function __construct(array $values = [])

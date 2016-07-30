@@ -8,10 +8,16 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="ComputerBody"))
+ */
 class ComputerBody extends Component implements \JsonSerializable
 {
 
+    /**
+     * @SWG\Property()
+     * @var string
+     */
     private $formFactor;
 
     public function __construct($id, $name, $price, $formFactor)

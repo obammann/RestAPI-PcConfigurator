@@ -8,11 +8,21 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="HDD"))
+ */
 class HDD extends Component implements \JsonSerializable
 {
 
+    /**
+     * @SWG\Property()
+     * @var string
+     */
     private $type;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $memory;
 
     public function __construct($id, $name, $price, $type, $memory)

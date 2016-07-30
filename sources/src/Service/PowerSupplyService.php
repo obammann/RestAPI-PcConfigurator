@@ -25,6 +25,30 @@ class PowerSupplyService
 
     }
 
+    /**
+     * @SWG\Get(
+     *     path="/powersupply/getList",
+     *     summary="Finds all power supplies",
+     *     tags={"power supply", "List"},
+     *     description="...",
+     *     operationId="getPowerSupplyList",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/PowerSupply")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
+
     public function getList()
     {
         $listOfAllPowerSupplies = new AbstractResponse();
@@ -36,6 +60,41 @@ class PowerSupplyService
             return new JsonResponse($listOfAllPowerSupplies);
         }
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/powersupply/{id}",
+     *     summary="Find power supply by ID",
+     *     description="Returns a single power supply",
+     *     operationId="getPowerSupplyByID",
+     *     tags={"power supply"},
+     *     consumes={
+     *         "application/json"
+     *     },
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of power supply to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/PowerSupply")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Power supply not found"
+     *     )
+     * )
+     */
 
     public function getSinglePowerSupply($id){
         $getSinglePowerSupplyResponse = new AbstractResponse();

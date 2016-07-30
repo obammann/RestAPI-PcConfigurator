@@ -8,13 +8,35 @@
 
 namespace HsBremen\WebApi\Entity;
 
-
+/**
+ * @SWG\Definition(required={"name"}, @SWG\XmL(name="Mainboard"))
+ */
 class Mainboard extends Component implements \JsonSerializable
 {
+    /**
+     * @SWG\Property()
+     * @var string
+     */
     private $processorSocket;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $numberDDR3Slots;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $numberDDR4Slots;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $numberSataConnectors;
+    /**
+     * @SWG\Property()
+     * @var int
+     */
     private $numberPCIeSlots;
 
 

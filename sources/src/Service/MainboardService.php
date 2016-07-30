@@ -23,12 +23,71 @@ class MainboardService
         $this->database = new MainboardDatabase();
     }
 
+    /**
+     * @SWG\Get(
+     *     path="/Mainboard/getList",
+     *     summary="Finds all mainboards",
+     *     tags={"Mainboard", "List"},
+     *     description="...",
+     *     operationId="getMainboardList",
+     *     consumes={"application/xml", "application/json"},
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/Mainboard")
+     *         ),
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid tag value",
+     *     )
+     * )
+     */
+
     public function getList()
     {
         $listOFAllMainboards = $this->database->getDatabase();
         return new JsonResponse($listOFAllMainboards);
     }
 
+
+    /**
+     * @SWG\Get(
+     *     path="/mainboard/{id}",
+     *     summary="Find mainboard by ID",
+     *     description="Returns a single mainboard",
+     *     operationId="getMainboardByID",
+     *     tags={"mainboard"},
+     *     consumes={
+     *         "application/json"
+     *     },
+     *     produces={"application/xml", "application/json"},
+     *     @SWG\Parameter(
+     *         description="ID of mainboard to return",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/Mainboard")
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Invalid ID supplied"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Mainboard not found"
+     *     )
+     * )
+     */
 
     public function getSingleMainboard($id){
 

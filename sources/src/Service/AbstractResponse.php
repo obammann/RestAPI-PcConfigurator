@@ -110,6 +110,13 @@ class AbstractResponse implements \JsonSerializable
         $this->state = $state;
     }
 
+    public function getJson(){
+        $response = new JsonResponse();
+        $response->setContent(file_get_contents('../v1/docs/swagger.json'));
+        //$response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
     public function getWelcomeMessage(){
 
         return new JsonResponse([
@@ -118,7 +125,7 @@ class AbstractResponse implements \JsonSerializable
             'Team member_1'     => "Fabian Redecker (375750)",
             'Team member_2'     => "Christoph Schütte ()",
             'Team member_3'     => "Oliver Bammann (360330)",
-            'Team member_4'     => "Lennard Plog ()",
+            'Team member_4'     => "Lennart Ploog ()",
         ]);
     }
 
