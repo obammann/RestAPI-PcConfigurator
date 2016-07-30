@@ -16,6 +16,9 @@ class HDDDatabase extends AbstractDatabase
 
     private $hddDatabase;
 
+    /**
+     * HDDDatabase constructor.
+     */
     public function __construct()
     {
         $this->hddDatabase = [
@@ -32,26 +35,49 @@ class HDDDatabase extends AbstractDatabase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getDatabase()
     {
         return $this->hddDatabase;
     }
 
+    /**
+     * @param $database
+     */
     public function setDatabase($database)
     {
         $this->hddDatabase = $database;
     }
 
+    /**
+     * @param $newComponent
+     */
     public function addComponent($newComponent)
     {
         array_push($this->hddDatabase, $newComponent);
     }
 
+    /**
+     * @param $componentId
+     * @return mixed
+     */
     public function getComponent($componentId)
     {
         return $this->hddDatabase[$componentId];
     }
 
+    /**
+     * @param $param0
+     * @param $param1
+     * @param $param2
+     * @param $param3
+     * @param $param4
+     * @param null $param5
+     * @param null $param6
+     * @param null $param7
+     */
     public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5 = null, $param6 = null, $param7 = null)
     {
         $this->hddDatabase[$param0]->setName($param1);
@@ -60,6 +86,9 @@ class HDDDatabase extends AbstractDatabase
         $this->hddDatabase[$param0]->setMemory($param4);
     }
 
+    /**
+     * @param $componentId
+     */
     public function deleteComponent($componentId)
     {
         unset($this->hddDatabase[$componentId]);

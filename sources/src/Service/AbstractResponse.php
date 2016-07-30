@@ -22,6 +22,14 @@ class AbstractResponse implements \JsonSerializable
 
     public function __construct(){}
 
+    /**
+     * This class is used for response in case of some error.
+     * So the response will include the name, id, action(current method) & state(content of the error)
+     * @param $comName
+     * @param $comId
+     * @param $action
+     * @param $state
+     */
     public function initResponse($comName, $comId, $action, $state){
         $this->componentName = $comName;
         $this-> componentId = $comId;
@@ -110,17 +118,15 @@ class AbstractResponse implements \JsonSerializable
         $this->state = $state;
     }
 
-    public function getJson(){
-        $response = new JsonResponse();
-        $response->setContent(file_get_contents('../v1/docs/swagger.json'));
-        //$response->headers->set('Content-Type', 'application/json');
-        return $response;
-    }
-
+    /**
+     * welcome response for GET /
+     * @return JsonResponse
+     */
     public function getWelcomeMessage(){
 
         return new JsonResponse([
             'Welcome'           => "Willkommen zum RestApi-PCConfigurator",
+            'Course'            => "MI_REST_API_ENTWICKLUNG_2016",
             'University'        => "Bremen University of Applied Sciences",
             'Team member_1'     => "Fabian Redecker (375750)",
             'Team member_2'     => "Christoph Schütte ()",

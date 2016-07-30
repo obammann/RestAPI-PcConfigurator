@@ -38,7 +38,6 @@ class Application extends Silex
         // Nutzt Pimple DI-Container: https://github.com/silexphp/Pimple/tree/1.1
         $app['service.abstractResponse'] = $app->share(function () {
             return new AbstractResponse();
-
         });
 
         $app['service.processor'] = $app->share(function () {
@@ -77,6 +76,9 @@ class Application extends Silex
             return new CdDriveService();
         });
 
+        /**
+         * create RoutesManager & init routes for the service class methods
+         */
         $routesManager = new RoutesManager();
         $routesManager->initRoutes($this);
 

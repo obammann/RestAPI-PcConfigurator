@@ -15,6 +15,9 @@ class ComputerBodyDatabase extends AbstractDatabase
 
     private $computerBodyDatabase;
 
+    /**
+     * ComputerBodyDatabase constructor.
+     */
     public function __construct()
     {
         $this->computerBodyDatabase= [
@@ -31,26 +34,49 @@ class ComputerBodyDatabase extends AbstractDatabase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getDatabase()
     {
        return $this->computerBodyDatabase;
     }
 
+    /**
+     * @param $database
+     */
     public function setDatabase($database)
     {
         $this->computerBodyDatabase = $database;
     }
 
+    /**
+     * @param $newComponent
+     */
     public function addComponent($newComponent)
     {
         array_push($this->computerBodyDatabase, $newComponent);
     }
 
+    /**
+     * @param $componentId
+     * @return mixed
+     */
     public function getComponent($componentId)
     {
         return $this->computerBodyDatabase[$componentId];
     }
 
+    /**
+     * @param $param0
+     * @param $param1
+     * @param $param2
+     * @param $param3
+     * @param null $param4
+     * @param null $param5
+     * @param null $param6
+     * @param null $param7
+     */
     public function updateComponent($param0, $param1, $param2, $param3, $param4 = null, $param5 = null, $param6 = null, $param7= null)
     {
         $this->computerBodyDatabase[$param0]->setName($param1);
@@ -58,6 +84,9 @@ class ComputerBodyDatabase extends AbstractDatabase
         $this->computerBodyDatabase[$param0]->setFormFactor($param3);
     }
 
+    /**
+     * @param $componentId
+     */
     public function deleteComponent($componentId)
     {
         unset($this->computerBodyDatabase[$componentId]);

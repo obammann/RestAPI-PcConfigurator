@@ -16,6 +16,9 @@ class MainboardDatabase extends AbstractDatabase
 
     private $mainboardDatabase;
 
+    /**
+     * MainboardDatabase constructor.
+     */
     public function __construct()
     {
       //  ($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots)
@@ -33,26 +36,49 @@ class MainboardDatabase extends AbstractDatabase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getDatabase()
     {
         return $this->mainboardDatabase;
     }
 
+    /**
+     * @param $database
+     */
     public function setDatabase($database)
     {
         $this->mainboardDatabase = $database;
     }
 
+    /**
+     * @param $newComponent
+     */
     public function addComponent($newComponent)
     {
         array_push($this->mainboardDatabase, $newComponent);
     }
 
+    /**
+     * @param $componentId
+     * @return mixed
+     */
     public function getComponent($componentId)
     {
         return $this->mainboardDatabase[$componentId];
     }
 
+    /**
+     * @param $param0
+     * @param $param1
+     * @param $param2
+     * @param $param3
+     * @param $param4
+     * @param $param5
+     * @param $param6
+     * @param $param7
+     */
     public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6, $param7)
     {
         $this->mainboardDatabase[$param0]->setName($param1);
@@ -64,6 +90,9 @@ class MainboardDatabase extends AbstractDatabase
         $this->mainboardDatabase[$param0]->setNumberPCIeSlots($param7);
     }
 
+    /**
+     * @param $componentId
+     */
     public function deleteComponent($componentId)
     {
         unset($this->mainboardDatabase[$componentId]);

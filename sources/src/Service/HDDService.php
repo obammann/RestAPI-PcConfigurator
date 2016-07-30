@@ -16,14 +16,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class HDDService
 {
     private $database;
+    private $databaseSize;
     public static $TAG = 'HDDService';
 
+    /**
+     * HDDService constructor.
+     */
     public function __construct()
     {
         $this->database = new HDDDatabase();
-
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
+    /**
+     * GET/hdd
+     * @return JsonResponse
+     */
 
     /**
      * @SWG\Get(
@@ -55,6 +63,11 @@ class HDDService
         return new JsonResponse($listOFAllHDDs);
     }
 
+    /**
+     * GET /hdd/{id}
+     * @param $id
+     * @return JsonResponse
+     */
 
     /**
      * @SWG\Get(
@@ -102,39 +115,78 @@ class HDDService
         }
     }
 
+    /**
+     * POST /hdd/{id}/{name}/{price}/{type}/{memory}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $type
+     * @param $memory
+     * @return JsonResponse
+     */
     public function addHDD($id, $name, $price, $type, $memory){
-        $addHDDResponse = new AbstractResponse();
-        try{
-            $this->database->addComponent(new HDD($id, $name, $price, $type, $memory));
-            $addHDDResponse->initResponse($name, $id, "addHDD()", "success");
-            return new JsonResponse($addHDDResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $addHDDResponse->initResponse($name, $id, "addHDD()", $e->getMessage());
-            return new JsonResponse($addHDDResponse->jsonSerialize());
+        $addProcessorResponse = new AbstractResponse();
+        if ($id > $this->databaseSize -1) {
+            try {
+                $this->database->addComponent(new HDD($id, $name, $price, $type, $memory));
+                $addedElement = $this->database->getComponent($id);
+                return new JsonResponse($addedElement, 200);
+            } catch (\Exception $e) {
+                $addProcessorResponse->initResponse($name, $id, "addHDD", $e->getMessage());
+                return new JsonResponse($addProcessorResponse->jsonSerialize());
+            }
+        }else{
+            $addProcessorResponse->initResponse($name, $id, "addHDD", "id is already used");
+            return new JsonResponse($addProcessorResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * PUT /hdd/{id}/{name}/{price}/{type}/{memory}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $type
+     * @param $memory
+     * @return JsonResponse
+     */
     public function updateHDD($id, $name, $price, $type, $memory){
         $updateResponse = new AbstractResponse();
-        try {
-            $this->database->updateComponent($id, $name, $price, $type, $memory);
-            $updateResponse->initResponse($name, $id, "updateHDD()", "success");
-            return new JsonResponse($updateResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $updateResponse->initResponse($name, $id, "updateHDD()", + $e->getMessage() );
-            return new JsonResponse($updateResponse->jsonSerialize());
+        if($id < $this->databaseSize) {
+            try {
+                $this->database->updateComponent($id, $name, $price, $type, $memory);
+                $updatedElement = $this->database->getComponent($id);
+                return new JsonResponse($updatedElement, 200);
+            } catch (\Exception $e) {
+                $updateResponse->initResponse($name, $id, "updateHDD", +$e->getMessage());
+                return new JsonResponse($updateResponse->jsonSerialize());
+            }
+        }else{
+            $updateResponse->initResponse($name,$id, "updateHDD", "Element id does not exist");
+            return new JsonResponse($updateResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * DELETE /hdd/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     public function deleteHDD($id){
         $deleteResponse = new AbstractResponse();
-        try {
-            $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(HDDService::$TAG , $id, "deleteHDD", "success");
-            return new JsonResponse($deleteResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $deleteResponse->initResponse(HDDService::$TAG , $id, "deleteHDD", $e->getMessage());
-            return new JsonResponse($deleteResponse->jsonSerialize());
+        if ($id < $this->databaseSize) {
+            try {
+                $objectName = $this->database->getComponent($id)->getName();
+                $this->database->deleteComponent($id);
+                $deleteResponse->initResponse($objectName, $id, "deleteHDD", "success");
+                return new JsonResponse($deleteResponse->jsonSerialize(), 200);
+            } catch (\OutOfBoundsException  $e) {
+                $deleteResponse->initResponse(ProcessorService::$TAG, $id, "deleteHDD", $e->getMessage());
+                return new JsonResponse($deleteResponse->jsonSerialize(), 406);
+            }
+        }else{
+            $deleteResponse->initResponse(ProcessorService::$TAG, $id, "deleteHDD", "Element id does not exist");
+            return new JsonResponse($deleteResponse->jsonSerialize(), 406);
         }
     }
 

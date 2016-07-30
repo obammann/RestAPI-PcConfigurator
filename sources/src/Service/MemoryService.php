@@ -16,13 +16,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class MemoryService
 {
     private $database;
+    private $databaseSize;
     public  static $TAG = 'MemoryService';
 
+    /**
+     * MemoryService constructor.
+     */
     public function __construct()
     {
         $this->database = new MemoryDatabase();
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
+    /**
+     * GET /memory
+     * @return JsonResponse
+     */
     /**
      * @SWG\Get(
      *     path="/memory/getList",
@@ -54,6 +63,11 @@ class MemoryService
     }
 
 
+    /**
+     * GET /memory/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     /**
      * @SWG\Get(
      *     path="/memory/{id}",
@@ -100,40 +114,80 @@ class MemoryService
         }
     }
 
-
+    /**
+     * POST /memory/{id}/{name}/{price}/{type}/{module}/{memory}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $type
+     * @param $module
+     * @param $memory
+     * @return JsonResponse
+     */
     public function addMemory($id, $name, $price, $type, $module, $memory){
         $addMemoryResponse = new AbstractResponse();
-        try{
-            $this->database->addComponent(new Memory($id, $name, $price, $type, $module, $memory));
-            $addMemoryResponse->initResponse($name, $id, "addMemory()", "success");
-            return new JsonResponse($addMemoryResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $addMemoryResponse->initResponse($name, $id, "addMemory()", $e->getMessage());
-            return new JsonResponse($addMemoryResponse->jsonSerialize());
+        if ($id > $this->databaseSize -1) {
+            try {
+                $this->database->addComponent(new Memory($id, $name, $price, $type, $module, $memory));
+                $addedElement = $this->database->getComponent($id);
+                return new JsonResponse($addedElement, 200);
+            } catch (\Exception $e) {
+                $addMemoryResponse->initResponse($name, $id, "addMemory()", $e->getMessage());
+                return new JsonResponse($addMemoryResponse->jsonSerialize());
+            }
+        }else{
+            $addMemoryResponse->initResponse($name, $id, "addMemory()", "id is already used");
+            return new JsonResponse($addMemoryResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * PUT /memory/{id}/{name}/{price}/{type}/{module}/{memory}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $type
+     * @param $module
+     * @param $memory
+     * @return JsonResponse
+     */
     public function updateMemory($id, $name, $price, $type, $module, $memory){
         $updateResponse = new AbstractResponse();
-        try {
-            $this->database->updateComponent($id, $name, $price, $type, $module, $memory);
-            $updateResponse->initResponse($name, $id, "updateMemory()", "success");
-            return new JsonResponse($updateResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $updateResponse->initResponse($name, $id, "updateMemory()", + $e->getMessage() );
-            return new JsonResponse($updateResponse->jsonSerialize());
+        if($id < $this->databaseSize) {
+            try {
+                $this->database->updateComponent($id, $name, $price, $type, $module, $memory);
+                $updatedElement = $this->database->getComponent($id);
+                return new JsonResponse($updatedElement, 200);
+            } catch (\Exception $e) {
+                $updateResponse->initResponse($name, $id, "updateMemory()", +$e->getMessage());
+                return new JsonResponse($updateResponse->jsonSerialize());
+            }
+        }else{
+            $updateResponse->initResponse($name,$id, "updateMemory()", "Element id does not exist");
+            return new JsonResponse($updateResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * DELETE /memory/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     public function deleteMemory($id){
         $deleteResponse = new AbstractResponse();
-        try {
-            $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(MemoryService::$TAG , $id, "deleteMemory()", "success");
-            return new JsonResponse($deleteResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $deleteResponse->initResponse(MemoryService::$TAG , $id, "deleteMemory()", $e->getMessage());
-            return new JsonResponse($deleteResponse->jsonSerialize());
+        if ($id < $this->databaseSize) {
+            try {
+                $objectName = $this->database->getComponent($id)->getName();
+                $this->database->deleteComponent($id);
+                $deleteResponse->initResponse($objectName, $id, "deleteMemory()", "success");
+                return new JsonResponse($deleteResponse->jsonSerialize());
+            } catch (\Exception $e) {
+                $deleteResponse->initResponse(MemoryService::$TAG, $id, "deleteMemory()", $e->getMessage());
+                return new JsonResponse($deleteResponse->jsonSerialize());
+            }
+        }else{
+            $deleteResponse->initResponse(MemoryService::$TAG, $id, "deleteMemory()", "Element id does not exist");
+            return new JsonResponse($deleteResponse->jsonSerialize(), 406);
         }
     }
 }

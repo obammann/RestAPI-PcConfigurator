@@ -16,14 +16,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ProcessorCoolerService
 {
     private $database;
+    private $databaseSize;
     public  static $TAG = 'ProcessorCoolerService';
 
+    /**
+     * ProcessorCoolerService constructor.
+     */
     public function __construct()
     {
         $this->database = new ProcessorCoolerDatabase();
-
+        $this->databaseSize = count($this->database->getDatabase());
     }
 
+    /**
+     * GET /processorcooler
+     * @return JsonResponse
+     */
 
     /**
      * @SWG\Get(
@@ -61,6 +69,11 @@ class ProcessorCoolerService
         }
     }
 
+    /**
+     * GET /processorcooler/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     /**
      * @SWG\Get(
      *     path="/processorcooler/{id}",
@@ -107,40 +120,78 @@ class ProcessorCoolerService
         }
     }
 
+    /**
+     * POST /processorcooler/{id}/{name}/{price}/{processorSocket}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $processorSocket
+     * @return JsonResponse
+     */
     public function addProcessorCooler($id, $name, $price, $processorSocket){
-        $addProcessorCoolerResponse = new AbstractResponse();
-        try{
-            $this->database->addComponent(new ProcessorCooler($id,$name,$price,$processorSocket ));
-            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler()", "success");
-            return new JsonResponse($addProcessorCoolerResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $addProcessorCoolerResponse->initResponse($name, $id, "addProcessorCooler()", $e->getMessage());
-            return new JsonResponse($addProcessorCoolerResponse->jsonSerialize());
+        $addProcessorResponse = new AbstractResponse();
+        if ($id > $this->databaseSize -1) {
+            try {
+                $this->database->addComponent(new ProcessorCooler($id, $name, $price, $processorSocket));
+                $addedElement = $this->database->getComponent($id);
+                return new JsonResponse($addedElement, 200);
+            } catch (\Exception $e) {
+                $addProcessorResponse->initResponse($name, $id, "addProcessorCooler", $e->getMessage());
+                return new JsonResponse($addProcessorResponse->jsonSerialize());
+            }
+        }else{
+            $addProcessorResponse->initResponse($name, $id, "addProcessorCooler", "id is already used");
+            return new JsonResponse($addProcessorResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * PUT /processorcooler/{id}/{name}/{price}/{processorSocket}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $processorSocket
+     * @return JsonResponse
+     */
     public function updateProcessorCooler($id, $name, $price, $processorSocket){
         $updateResponse = new AbstractResponse();
-        try {
-            $this->database->updateComponent($id, $name, $price, $processorSocket);
-            $updateResponse->initResponse($name, $id, "updateProcessorCooler()", "success");
-            return new JsonResponse($updateResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $updateResponse->initResponse($name, $id, "updateProcessorCooler()", + $e->getMessage() );
-            return new JsonResponse($updateResponse->jsonSerialize());
+        if($id < $this->databaseSize) {
+            try {
+                $this->database->updateComponent($id, $name, $price, $processorSocket);
+                $updatedElement = $this->database->getComponent($id);
+                return new JsonResponse($updatedElement, 200);
+            } catch (\Exception $e) {
+                $updateResponse->initResponse($name, $id, "updateProcessorCooler", +$e->getMessage());
+                return new JsonResponse($updateResponse->jsonSerialize());
+            }
+        }else{
+            $updateResponse->initResponse($name,$id, "updateProcessorCooler", "Element id does not exist");
+            return new JsonResponse($updateResponse->jsonSerialize(), 406);
         }
     }
 
+    /**
+     * DELETE /processorcooler/{id}
+     * @param $id
+     * @return JsonResponse
+     */
     public function deleteProcessorCooler($id){
         $deleteResponse = new AbstractResponse();
-        try {
-            $this->database->deleteComponent($id);
-            $deleteResponse->initResponse(ProcessorCoolerService::$TAG , $id, "deleteProcessorCooler()", "success");
-            return new JsonResponse($deleteResponse->jsonSerialize());
-        }catch (\Exception $e){
-            $deleteResponse->initResponse(ProcessorCoolerService::$TAG , $id, "deleteProcessorCooler()", $e->getMessage());
-            return new JsonResponse($deleteResponse->jsonSerialize());
+        if ($id < $this->databaseSize) {
+            try {
+                $objectName = $this->database->getComponent($id)->getName();
+                $this->database->deleteComponent($id);
+                $deleteResponse->initResponse($objectName, $id, "deleteProcessorCooler", "success");
+                return new JsonResponse($deleteResponse->jsonSerialize(), 200);
+            } catch (\OutOfBoundsException  $e) {
+                $deleteResponse->initResponse(ProcessorService::$TAG, $id, "deleteProcessor", $e->getMessage());
+                return new JsonResponse($deleteResponse->jsonSerialize(), 406);
+            }
+        }else{
+            $deleteResponse->initResponse(ProcessorCoolerService::$TAG, $id, "deleteProcessorCooler", "Element id does not exist");
+            return new JsonResponse($deleteResponse->jsonSerialize(), 406);
         }
     }
+
 
 }

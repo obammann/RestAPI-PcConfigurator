@@ -16,6 +16,9 @@ class MemoryDatabase extends AbstractDatabase
 
     private $memoryDatabase;
 
+    /**
+     * MemoryDatabase constructor.
+     */
     public function __construct()
     {
        // ($id, $name, $price, $type, $module, $memory)
@@ -34,26 +37,49 @@ class MemoryDatabase extends AbstractDatabase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getDatabase()
     {
         return $this->memoryDatabase;
     }
 
+    /**
+     * @param $database
+     */
     public function setDatabase($database)
     {
         $this->memoryDatabase = $database;
     }
 
+    /**
+     * @param $newComponent
+     */
     public function addComponent($newComponent)
     {
         array_push($this->memoryDatabase, $newComponent);
     }
 
+    /**
+     * @param $componentId
+     * @return mixed
+     */
     public function getComponent($componentId)
     {
         return $this->memoryDatabase[$componentId];
     }
 
+    /**
+     * @param $param0
+     * @param $param1
+     * @param $param2
+     * @param $param3
+     * @param $param4
+     * @param $param5
+     * @param null $param6
+     * @param null $param7
+     */
     public function updateComponent($param0, $param1, $param2, $param3, $param4, $param5, $param6 = null, $param7 = null)
     {
         $this->memoryDatabase[$param0]->setName($param1);
@@ -63,6 +89,9 @@ class MemoryDatabase extends AbstractDatabase
         $this->memoryDatabase[$param0]->setMemory($param5);
     }
 
+    /**
+     * @param $componentId
+     */
     public function deleteComponent($componentId)
     {
         unset($this->memoryDatabase[$componentId]);
