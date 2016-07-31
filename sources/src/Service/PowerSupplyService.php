@@ -41,7 +41,6 @@ class PowerSupplyService
      *     tags={"power supply", "List"},
      *     description="...",
      *     operationId="getPowerSupplyList",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
@@ -81,10 +80,7 @@ class PowerSupplyService
      *     description="Returns a single power supply",
      *     operationId="getPowerSupplyByID",
      *     tags={"power supply"},
-     *     consumes={
-     *         "application/json"
-     *     },
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of power supply to return",
      *         in="path",
@@ -133,7 +129,6 @@ class PowerSupplyService
      *     operationId="addPowerSupply",
      *     summary="Add a new power supply",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -154,7 +149,8 @@ class PowerSupplyService
      *         in="path",
      *         description="price of the power supply",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="power",
@@ -202,7 +198,6 @@ class PowerSupplyService
      *     operationId="updatePowerSupply",
      *     summary="update a power supply",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -223,7 +218,8 @@ class PowerSupplyService
      *         in="path",
      *         description="new price of the power supply",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="power",
@@ -266,7 +262,6 @@ class PowerSupplyService
      *     summary="Deletes a power supply",
      *     description="",
      *     operationId="deletePowerSupply",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"power supply"},
      *     @SWG\Parameter(

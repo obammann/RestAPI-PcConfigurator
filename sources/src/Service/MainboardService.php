@@ -39,8 +39,7 @@ class MainboardService
      *     tags={"Mainboard", "List"},
      *     description="...",
      *     operationId="getMainboardList",
-     *     consumes={"application/xml", "application/json"},
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
      *         description="successful operation",
@@ -75,9 +74,6 @@ class MainboardService
      *     description="Returns a single mainboard",
      *     operationId="getMainboardByID",
      *     tags={"mainboard"},
-     *     consumes={
-     *         "application/json"
-     *     },
      *     produces={"application/xml", "application/json"},
      *     @SWG\Parameter(
      *         description="ID of mainboard to return",
@@ -126,6 +122,77 @@ class MainboardService
      * @param $numberPCIeSlots
      * @return JsonResponse
      */
+    /**
+     * @SWG\Post(
+     *     path="/mainboard/{id}/{name}/{pr/ice}/{processorSocket}/{numberDDR3Slots}/{numberDDR4Slots}/{numberSataConnectors}/{numberPCIeSlots}",
+     *     tags={"mainboard"},
+     *     operationId="addMainboard",
+     *     summary="Add a mainboard",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the mainboard",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the mainboard",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the mainboard",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="processorSocket",
+     *         in="path",
+     *         description="type of processor socket",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="numberDDR3Slots",
+     *         in="path",
+     *         description="number of DDR3 slots",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="numberDDR4Slots",
+     *         in="path",
+     *         description="number of DDR4 slots",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="numberSataConnectors",
+     *         in="path",
+     *         description="number of sata connectors",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="numberPCIeSlots",
+     *         in="path",
+     *         description="number of PCIe slots",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function addMainboard($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots){
         $addMainboardResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -155,6 +222,77 @@ class MainboardService
      * @param $numberPCIeSlots
      * @return JsonResponse
      */
+    /**
+     * @SWG\Put(
+     *     path="/mainboard/{id}/{name}/{price}/{processorSocket}/{numberDDR3Slots}/{numberDDR4Slots}/{numberSataConnectors}/{numberPCIeSlots}",
+     *     tags={"mainboard"},
+     *     operationId="updateMainboard",
+     *     summary="Update a mainboard",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the mainboard",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="new name of the mainboard",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="new price of the mainboard",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="processor socket",
+     *         in="path",
+     *         description="new type of processor socket",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="numberDDR3slots",
+     *         in="path",
+     *         description="new number of DDR3 slots",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="numberDDR4Slots",
+     *         in="path",
+     *         description="new number of DDR4 slots",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="numberSataConnectors",
+     *         in="path",
+     *         description="new number of sata connectors",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="numberPCIeSlots",
+     *         in="path",
+     *         description="new number of PCIe slots",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function updateMainboard($id, $name, $price, $processorSocket, $numberDDR3Slots , $numberDDR4Slots, $numberSataConnectors, $numberPCIeSlots){
         $updateResponse = new AbstractResponse();
         if($id < $this->databaseSize) {
@@ -183,7 +321,6 @@ class MainboardService
      *     summary="Deletes a mainboard",
      *     description="",
      *     operationId="deleteMainboard",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"mainboard"},
      *     @SWG\Parameter(
@@ -196,7 +333,7 @@ class MainboardService
      *     ),
      *     @SWG\Response(
      *         response=400,
-     *         description="Invalid mmainboard id"
+     *         description="Invalid mainboard id"
      *     ),
      * )
      */

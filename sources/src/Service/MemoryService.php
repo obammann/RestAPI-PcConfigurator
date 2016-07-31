@@ -39,7 +39,6 @@ class MemoryService
      *     tags={"Memory", "List"},
      *     description="...",
      *     operationId="getMemoryList",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
@@ -75,10 +74,7 @@ class MemoryService
      *     description="Returns a single memory",
      *     operationId="getMemoryByID",
      *     tags={"memory"},
-     *     consumes={
-     *         "application/json"
-     *     },
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of memory to return",
      *         in="path",
@@ -124,6 +120,73 @@ class MemoryService
      * @param $memory
      * @return JsonResponse
      */
+    /**
+     * PUT /memory/{id}/{name}/{price}/{type}/{module}/{memory}
+     * @param $id
+     * @param $name
+     * @param $price
+     * @param $type
+     * @param $module
+     * @param $memory
+     * @return JsonResponse
+     */
+    /**
+     * @SWG\Post(
+     *     path="/memory/{id}/{name}/{price}/{type}/{module}/{memory}",
+     *     tags={"memory"},
+     *     operationId="addMemory",
+     *     summary="Add a memory unit",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the memory unit",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the memory unit",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the memory unit",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="path",
+     *         description="type of the memory unit",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="module",
+     *         in="path",
+     *         description="number of memory modules per unit",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="memory",
+     *         in="path",
+     *         description="memory capacity of the memory unit",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function addMemory($id, $name, $price, $type, $module, $memory){
         $addMemoryResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -150,6 +213,63 @@ class MemoryService
      * @param $module
      * @param $memory
      * @return JsonResponse
+     */
+    /**
+     * @SWG\Put(
+     *     path="/memory/{id}/{name}/{price}/{type}/{module}/{memory}",
+     *     tags={"memory"},
+     *     operationId="updateMemory",
+     *     summary="Update a memory unit",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the memory unit",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="new name of the memory unit",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="new price of the memory unit",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="path",
+     *         description="new type of the memory unit",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="module",
+     *         in="path",
+     *         description="new number of memory modules per unit",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="memory",
+     *         in="path",
+     *         description="new memory capacity of the memory unit",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
      */
     public function updateMemory($id, $name, $price, $type, $module, $memory){
         $updateResponse = new AbstractResponse();
@@ -179,7 +299,6 @@ class MemoryService
      *     summary="Deletes a memory",
      *     description="",
      *     operationId="deleteMemory",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"memory"},
      *     @SWG\Parameter(

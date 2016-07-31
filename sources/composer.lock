@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eee419e6e0682186888205d657f1308f",
-    "content-hash": "e2ced28cb626f8d17bd967797f9ab993",
+    "hash": "b7b2d320a8ccf4f852798ebef0ef4d73",
+    "content-hash": "6d978efaabf6055a70f979b4915e3e32",
     "packages": [
         {
             "name": "basster/silex-simple-swagger-provider",
@@ -176,50 +176,6 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
-        },
-        {
-            "name": "kbrabrand/silex-swagger-ui",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kbrabrand/silex-swagger-ui.git",
-                "reference": "300687988bcc1479b75462f63b9a72cdf9484ecf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kbrabrand/silex-swagger-ui/zipball/300687988bcc1479b75462f63b9a72cdf9484ecf",
-                "reference": "300687988bcc1479b75462f63b9a72cdf9484ecf",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "silex/silex": "~1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SwaggerUI": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kristoffer Brabrand",
-                    "email": "kristoffer@brabrand.no"
-                }
-            ],
-            "description": "A silex service provider that integrates the Swagger UI documentation browser into silex",
-            "keywords": [
-                "provider",
-                "service",
-                "silex",
-                "swagger",
-                "swagger-ui"
-            ],
-            "time": "2015-02-02 08:28:45"
         },
         {
             "name": "pimple/pimple",
@@ -2195,9 +2151,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "kbrabrand/silex-swagger-ui": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

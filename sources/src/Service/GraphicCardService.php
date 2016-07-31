@@ -40,7 +40,6 @@ class GraphicCardService
      *     tags={"graphic card", "List"},
      *     description="...",
      *     operationId="getGraphicCardList",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
@@ -76,10 +75,7 @@ class GraphicCardService
      *     description="Returns a single Graphic card",
      *     operationId="getGraphicCardByID",
      *     tags={"graphic Card"},
-     *     consumes={
-     *         "application/json"
-     *     },
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of graphic card to return",
      *         in="path",
@@ -124,6 +120,57 @@ class GraphicCardService
      * @param $memory
      * @return JsonResponse
      */
+    /**
+     * @SWG\Post(
+     *     path="/graphiccard/{id}/{name}/{price}/{slotsOccupied}/{memory}",
+     *     tags={"graphic card"},
+     *     operationId="addGraphicCard",
+     *     summary="add a graphic card",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the graphic card",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the graphic card",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the graphic card",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="slotsOccupied",
+     *         in="path",
+     *         description="number of PCIe slots occupied by the graphic card",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="memory",
+     *         in="path",
+     *         description="memory capacity of the graphic card",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function addGraphicCard($id, $name, $price, $slotsOccupied, $memory){
         $addGraphicCardResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -149,6 +196,56 @@ class GraphicCardService
      * @param $slotsOccupied
      * @param $memory
      * @return JsonResponse
+     */
+    /**
+     * @SWG\Put(
+     *     path="/graphiccard/{id}/{name}/{price}/{slotsOccupied}/{memory}",
+     *     tags={"graphic card"},
+     *     operationId="updateGraphicCard",
+     *     summary="Update a graphic card",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the graphic card",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="new name of the graphic card",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="new price of the graphic card",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="slotsOccupied",
+     *         in="path",
+     *         description="new number of PCIe slots occupied by the graphic card",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="memory",
+     *         in="path",
+     *         description="new memory capacity of the graphic card",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
      */
     public function updateGraphicCard($id, $name, $price, $slotsOccupied, $memory){
         $updateResponse = new AbstractResponse();
@@ -178,7 +275,6 @@ class GraphicCardService
      *     summary="Deletes a graphiccard",
      *     description="",
      *     operationId="deleteGraphicCard",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"graphic card"},
      *     @SWG\Parameter(

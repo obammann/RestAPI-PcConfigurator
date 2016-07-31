@@ -68,11 +68,11 @@ oder über die IDE
 ## Teammitglieder
  - Fabian Redecker (375750)
  - Christoph Schütte (377336)
- - Lennart Ploog (356556)
+ - Lennart Ploog (354556)
  - Oliver Bammann (360330)
 
-## Swagger
-Route: http://web-api.vm/api/swagger
+## Swagger.json
+Route: http://web-api.vm/api/api-docs
 
 
 

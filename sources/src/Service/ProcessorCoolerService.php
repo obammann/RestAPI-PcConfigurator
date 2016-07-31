@@ -40,7 +40,6 @@ class ProcessorCoolerService
      *     tags={"processor cooler", "List"},
      *     description="...",
      *     operationId="getProcessorCoolerList",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
@@ -81,10 +80,6 @@ class ProcessorCoolerService
      *     description="Returns a single processor cooler",
      *     operationId="getProcessorCoolerByID",
      *     tags={"processor cooler"},
-     *     consumes={
-     *         "application/json",
-     *         "application/x-www-form-urlencoded"
-     *     },
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of processor cooler to return",
@@ -129,13 +124,12 @@ class ProcessorCoolerService
      * @return JsonResponse
      */
     /**
-     * @SWG\Put(
+     * @SWG\Post(
      *     path="/processorcooler/{id}/{name}/{price}/{processorSocket}",
      *     tags={"processor cooler"},
      *     operationId="update processor cooler",
      *     summary="Add a new processor cooler",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -156,7 +150,8 @@ class ProcessorCoolerService
      *         in="path",
      *         description="price of the processor cooler",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="processorSocket",
@@ -203,7 +198,6 @@ class ProcessorCoolerService
      *     operationId="update processor cooler",
      *     summary="Add a new processor cooler",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -224,7 +218,8 @@ class ProcessorCoolerService
      *         in="path",
      *         description="new price of the processor cooler",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="processorSocket",

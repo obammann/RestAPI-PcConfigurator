@@ -39,8 +39,7 @@ class ComputerBodyService
      *     tags={"computer body", "List"},
      *     description="...",
      *     operationId="getComputerBodyList",
-     *     consumes={"application/xml", "application/json"},
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
      *         description="successful operation",
@@ -75,10 +74,7 @@ class ComputerBodyService
      *     description="Returns a single computer body",
      *     operationId="getComputerBodyByID",
      *     tags={"computer body"},
-     *     consumes={
-     *         "application/json"
-     *     },
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of computer body to return",
      *         in="path",
@@ -122,6 +118,49 @@ class ComputerBodyService
      * @param $formFactor
      * @return JsonResponse
      */
+    /**
+     * @SWG\Post(
+     *     path="/computerbody/{id}/{name}/{price}/{formFactor}",
+     *     tags={"computer body"},
+     *     operationId="addComputerBody",
+     *     summary="add a computer body",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the computer body",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the computer body",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the computer body",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="formFactor",
+     *         in="path",
+     *         description="form factor of the computer body",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function addComputerBody($id, $name, $price, $formFactor){
         $addProcessorResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -146,6 +185,49 @@ class ComputerBodyService
      * @param $price
      * @param $formFactor
      * @return JsonResponse
+     */
+    /**
+     * @SWG\Put(
+     *     path="/computerbody/{id}/{name}/{price}/{formFactor}",
+     *     tags={"computer body"},
+     *     operationId="updateComputerBody",
+     *     summary="update a computer body",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the computer body",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="new name of the computer body",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="new price of the computer body",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="formFactor",
+     *         in="path",
+     *         description="new form factor of the computer body",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
      */
     public function updateComputerBody($id, $name, $price, $formFactor){
         $updateResponse = new AbstractResponse();
@@ -175,7 +257,6 @@ class ComputerBodyService
      *     summary="Deletes a computer body",
      *     description="",
      *     operationId="deleteComputerBody",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"Computer Body"},
      *     @SWG\Parameter(

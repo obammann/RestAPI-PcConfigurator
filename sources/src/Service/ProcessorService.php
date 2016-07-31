@@ -39,8 +39,7 @@ class ProcessorService
      *     tags={"Processor", "List"},
      *     description="...",
      *     operationId="getProcessorList",
-     *     consumes={"application/xml", "application/json"},
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
      *         description="successful operation",
@@ -75,11 +74,6 @@ class ProcessorService
      *     description="Returns a single processor",
      *     operationId="getProcessorByID",
      *     tags={"processor"},
-     *     consumes={
-     *         "application/xml",
-     *         "application/json",
-     *         "application/x-www-form-urlencoded"
-     *     },
      *     produces={"application/xml", "application/json"},
      *     @SWG\Parameter(
      *         description="ID of processor to return",
@@ -132,7 +126,6 @@ class ProcessorService
      *     operationId="addCdDrive",
      *     summary="Add a new processor",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -153,7 +146,8 @@ class ProcessorService
      *         in="path",
      *         description="price of the processor",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="processorSocket",
@@ -167,14 +161,14 @@ class ProcessorService
      *         in="path",
      *         description="frequency of the processor",
      *         required=true,
-     *         type="int"
+     *         type="integer"
      *     ),
      *      @SWG\Parameter(
      *         name="cores",
      *         in="path",
      *         description="number of cores of the processor",
      *         required=true,
-     *         type="int"
+     *         type="integer"
      *     ),
      *     @SWG\Response(
      *         response=405,
@@ -217,7 +211,6 @@ class ProcessorService
      *     operationId="updateProcessor",
      *     summary="Update a processor",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -238,7 +231,8 @@ class ProcessorService
      *         in="path",
      *         description="price of the processor",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="processorSocket",
@@ -252,14 +246,14 @@ class ProcessorService
      *         in="path",
      *         description="frequency of the processor",
      *         required=true,
-     *         type="int"
+     *         type="integer"
      *     ),
      *      @SWG\Parameter(
      *         name="cores",
      *         in="path",
      *         description="number of cores of the processor",
      *         required=true,
-     *         type="int"
+     *         type="integer"
      *     ),
      *     @SWG\Response(
      *         response=405,
@@ -295,7 +289,6 @@ class ProcessorService
      *     summary="Deletes a processor",
      *     description="",
      *     operationId="deleteCdDrive",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"processor"},
      *     @SWG\Parameter(

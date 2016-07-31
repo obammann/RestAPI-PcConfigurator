@@ -39,8 +39,7 @@ class CdDriveService
      *     tags={"cd drive", "List"},
      *     description="...",
      *     operationId="getCdDriveList",
-     *     consumes={"application/xml", "application/json"},
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
      *         description="successful operation",
@@ -74,10 +73,7 @@ class CdDriveService
      *     description="Returns a single cd drive",
      *     operationId="getCdDriveByID",
      *     tags={"cd drive"},
-     *     consumes={
-     *         "application/json"
-     *     },
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of cd drive to return",
      *         in="path",
@@ -131,7 +127,6 @@ class CdDriveService
      *     operationId="addCdDrive",
      *     summary="Add a new cd drive",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -152,7 +147,8 @@ class CdDriveService
      *         in="path",
      *         description="prive of the cd drive",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="readingTime",
@@ -223,7 +219,6 @@ class CdDriveService
      *     operationId="updateCdDrive",
      *     summary="Update a cd drive",
      *     description="",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         name="id",
@@ -244,7 +239,8 @@ class CdDriveService
      *         in="path",
      *         description="new price of the cd drive",
      *         required=true,
-     *         type="number"
+     *         type="number",
+     *         format="double"
      *     ),
      *     @SWG\Parameter(
      *         name="readingTime",
@@ -309,7 +305,6 @@ class CdDriveService
      *     summary="Deletes a cd drive",
      *     description="",
      *     operationId="deleteCdDrive",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"cd drive"},
      *     @SWG\Parameter(
@@ -322,7 +317,7 @@ class CdDriveService
      *     ),
      *     @SWG\Response(
      *         response=400,
-     *         description="Invalid pet value"
+     *         description="Invalid ID value"
      *     ),
      * )
      */

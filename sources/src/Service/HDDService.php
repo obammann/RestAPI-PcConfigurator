@@ -40,7 +40,6 @@ class HDDService
      *     tags={"HDD", "List"},
      *     description="...",
      *     operationId="getHDDList",
-     *     consumes={"application/json"},
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response=200,
@@ -76,10 +75,7 @@ class HDDService
      *     description="Returns a single HDD",
      *     operationId="getHDDByID",
      *     tags={"HDD"},
-     *     consumes={
-     *         "application/json"
-     *     },
-     *     produces={"application/xml", "application/json"},
+     *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of HDD to return",
      *         in="path",
@@ -124,6 +120,56 @@ class HDDService
      * @param $memory
      * @return JsonResponse
      */
+    /**
+     * @SWG\Post(
+     *     path="/hdd/{id}/{name}/{price}/{type}/{memory}",
+     *     tags={"addHDD"},
+     *     operationId="updateHDD",
+     *     summary="add a HDD",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the HDD",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the HDD",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the HDD",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="path",
+     *         description="type of the HDD",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="memory",
+     *         in="path",
+     *         description="memory capacity of the HDD",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function addHDD($id, $name, $price, $type, $memory){
         $addProcessorResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -149,6 +195,56 @@ class HDDService
      * @param $type
      * @param $memory
      * @return JsonResponse
+     */
+    /**
+     * @SWG\Put(
+     *     path="/hdd/{id}/{name}/{price}/{type}/{memory}",
+     *     tags={"HDD"},
+     *     operationId="updateHDD",
+     *     summary="Update a HDD",
+     *     description="",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the HDD",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="new name of the HDD",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="new price of the HDD",
+     *         required=true,
+     *         type="number",
+     *         format="double"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="path",
+     *         description="new type of the HDD",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="memory",
+     *         in="path",
+     *         description="new memory capacity of the HDD",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
      */
     public function updateHDD($id, $name, $price, $type, $memory){
         $updateResponse = new AbstractResponse();
@@ -178,7 +274,6 @@ class HDDService
      *     summary="Deletes a hdd",
      *     description="",
      *     operationId="deleteHDD",
-     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
      *     produces={"application/json"},
      *     tags={"hdd"},
      *     @SWG\Parameter(
