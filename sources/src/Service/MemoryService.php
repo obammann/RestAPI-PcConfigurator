@@ -173,6 +173,29 @@ class MemoryService
      * @param $id
      * @return JsonResponse
      */
+    /**
+     * @SWG\Delete(
+     *     path="/memory/{id}",
+     *     summary="Deletes a memory",
+     *     description="",
+     *     operationId="deleteMemory",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"memory"},
+     *     @SWG\Parameter(
+     *         description="memory id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid memory id"
+     *     ),
+     * )
+     */
     public function deleteMemory($id){
         $deleteResponse = new AbstractResponse();
         if ($id < $this->databaseSize) {

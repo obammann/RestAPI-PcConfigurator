@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9aebd6354f89436a9ebbcd0e19a61cbb",
+    "hash": "eee419e6e0682186888205d657f1308f",
     "content-hash": "e2ced28cb626f8d17bd967797f9ab993",
     "packages": [
         {
@@ -397,12 +397,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "081a5659f767d317ac71ce0bce8a2101467e816e"
+                "reference": "60192753166696de6ac6414356bdaed1dfa15595"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/081a5659f767d317ac71ce0bce8a2101467e816e",
-                "reference": "081a5659f767d317ac71ce0bce8a2101467e816e",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/60192753166696de6ac6414356bdaed1dfa15595",
+                "reference": "60192753166696de6ac6414356bdaed1dfa15595",
                 "shasum": ""
             },
             "require": {
@@ -446,7 +446,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-26 08:08:27"
+            "time": "2016-07-30 07:26:43"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -616,12 +616,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "fedd4337f3442b2776a9a683fc71a9e09f2d8b8d"
+                "reference": "03ac7bbc8fccbf002e0bea88dbe09262b29dc2a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/fedd4337f3442b2776a9a683fc71a9e09f2d8b8d",
-                "reference": "fedd4337f3442b2776a9a683fc71a9e09f2d8b8d",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/03ac7bbc8fccbf002e0bea88dbe09262b29dc2a9",
+                "reference": "03ac7bbc8fccbf002e0bea88dbe09262b29dc2a9",
                 "shasum": ""
             },
             "require": {
@@ -690,7 +690,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-28 11:13:34"
+            "time": "2016-07-30 09:29:03"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1443,12 +1443,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f93bc03bf962600fe4d7d0de0486807ddfb2784f"
+                "reference": "d1e1d73a5a49e8f963572a46058da2e56d30566d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f93bc03bf962600fe4d7d0de0486807ddfb2784f",
-                "reference": "f93bc03bf962600fe4d7d0de0486807ddfb2784f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d1e1d73a5a49e8f963572a46058da2e56d30566d",
+                "reference": "d1e1d73a5a49e8f963572a46058da2e56d30566d",
                 "shasum": ""
             },
             "require": {
@@ -1513,7 +1513,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-07-26 14:51:56"
+            "time": "2016-07-29 11:55:47"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1909,12 +1909,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/object-enumerator.git",
-                "reference": "d4ca2fb70344987502567bc50081c03e6192fb26"
+                "reference": "d1e9bfd178891acc7a1d650e30b0645423af011d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/d4ca2fb70344987502567bc50081c03e6192fb26",
-                "reference": "d4ca2fb70344987502567bc50081c03e6192fb26",
+                "url": "https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/d1e9bfd178891acc7a1d650e30b0645423af011d",
+                "reference": "d1e9bfd178891acc7a1d650e30b0645423af011d",
                 "shasum": ""
             },
             "require": {
@@ -1947,7 +1947,7 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
-            "time": "2016-01-28 13:25:10"
+            "time": "2016-07-29 07:38:17"
         },
         {
             "name": "sebastian/recursion-context",

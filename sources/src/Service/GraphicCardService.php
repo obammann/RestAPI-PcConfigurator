@@ -172,6 +172,29 @@ class GraphicCardService
      * @param $id
      * @return JsonResponse
      */
+    /**
+     * @SWG\Delete(
+     *     path="/graphiccard/{id}",
+     *     summary="Deletes a graphiccard",
+     *     description="",
+     *     operationId="deleteGraphicCard",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"graphic card"},
+     *     @SWG\Parameter(
+     *         description="graphiccard id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid graphiccard id"
+     *     ),
+     * )
+     */
     public function deleteGraphicCard($id){
         $deleteResponse = new AbstractResponse();
         if ($id < $this->databaseSize) {

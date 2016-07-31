@@ -128,6 +128,49 @@ class ProcessorCoolerService
      * @param $processorSocket
      * @return JsonResponse
      */
+    /**
+     * @SWG\Put(
+     *     path="/processorcooler/{id}/{name}/{price}/{processorSocket}",
+     *     tags={"processor cooler"},
+     *     operationId="update processor cooler",
+     *     summary="Add a new processor cooler",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the processor cooler",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the processor cooler",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the processor cooler",
+     *         required=true,
+     *         type="number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="processorSocket",
+     *         in="path",
+     *         description="processor socket compatible with the cooler",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function addProcessorCooler($id, $name, $price, $processorSocket){
         $addProcessorResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -153,6 +196,49 @@ class ProcessorCoolerService
      * @param $processorSocket
      * @return JsonResponse
      */
+    /**
+     * @SWG\Put(
+     *     path="/cddrive/{id}/{name}/{price}/{processorSocket}",
+     *     tags={"processor cooler"},
+     *     operationId="update processor cooler",
+     *     summary="Add a new processor cooler",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the processor socket",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="new name of the processor cooler",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="new price of the processor cooler",
+     *         required=true,
+     *         type="number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="processorSocket",
+     *         in="path",
+     *         description="new processor socket compatible with the cooler",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function updateProcessorCooler($id, $name, $price, $processorSocket){
         $updateResponse = new AbstractResponse();
         if($id < $this->databaseSize) {
@@ -174,6 +260,29 @@ class ProcessorCoolerService
      * DELETE /processorcooler/{id}
      * @param $id
      * @return JsonResponse
+     */
+    /**
+     * @SWG\Delete(
+     *     path="/processorcooler/{id}",
+     *     summary="Deletes a processor cooler",
+     *     description="",
+     *     operationId="deleteProcessorCooler",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"processor cooler"},
+     *     @SWG\Parameter(
+     *         description="processor cooler id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid processor cooler id"
+     *     ),
+     * )
      */
     public function deleteProcessorCooler($id){
         $deleteResponse = new AbstractResponse();

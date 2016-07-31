@@ -125,6 +125,64 @@ class ProcessorService
      * @param $cores
      * @return JsonResponse
      */
+    /**
+     * @SWG\Post(
+     *     path="/processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}",
+     *     tags={"processor"},
+     *     operationId="addCdDrive",
+     *     summary="Add a new processor",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the processor",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the processor",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the processor",
+     *         required=true,
+     *         type="number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="processorSocket",
+     *         in="path",
+     *         description="socket of the processor",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="frequency",
+     *         in="path",
+     *         description="frequency of the processor",
+     *         required=true,
+     *         type="int"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="cores",
+     *         in="path",
+     *         description="number of cores of the processor",
+     *         required=true,
+     *         type="int"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
+
     public function addProcessor($id, $name, $price, $processorSocket, $frequency, $cores){
         $addProcessorResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -152,6 +210,63 @@ class ProcessorService
      * @param $cores
      * @return JsonResponse
      */
+    /**
+     * @SWG\Put(
+     *     path="/processor/{id}/{name}/{price}/{processorSocket}/{frequency}/{cores}",
+     *     tags={"processor"},
+     *     operationId="updateProcessor",
+     *     summary="Update a processor",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the processor",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the processor",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the processor",
+     *         required=true,
+     *         type="number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="processorSocket",
+     *         in="path",
+     *         description="socket of the processor",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="frequency",
+     *         in="path",
+     *         description="frequency of the processor",
+     *         required=true,
+     *         type="int"
+     *     ),
+     *      @SWG\Parameter(
+     *         name="cores",
+     *         in="path",
+     *         description="number of cores of the processor",
+     *         required=true,
+     *         type="int"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function updateProcessor($id, $name, $price, $processorSocket, $frequency, $cores){
         $updateResponse = new AbstractResponse();
         if($id < $this->databaseSize) {
@@ -173,6 +288,29 @@ class ProcessorService
      * DELETE /processor/{id}
      * @param $id
      * @return JsonResponse
+     */
+    /**
+     * @SWG\Delete(
+     *     path="/processor/{id}",
+     *     summary="Deletes a processor",
+     *     description="",
+     *     operationId="deleteCdDrive",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"processor"},
+     *     @SWG\Parameter(
+     *         description="processor id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid processor id"
+     *     ),
+     * )
      */
     public function deleteProcessor($id){
         $deleteResponse = new AbstractResponse();

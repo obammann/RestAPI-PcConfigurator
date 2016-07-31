@@ -169,6 +169,29 @@ class ComputerBodyService
      * @param $id
      * @return JsonResponse
      */
+    /**
+     * @SWG\Delete(
+     *     path="/computerbody/{id}",
+     *     summary="Deletes a computer body",
+     *     description="",
+     *     operationId="deleteComputerBody",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"Computer Body"},
+     *     @SWG\Parameter(
+     *         description="computer body id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid computer body id"
+     *     ),
+     * )
+     */
     public function deleteComputerBody($id){
         $deleteResponse = new AbstractResponse();
         if ($id < $this->databaseSize) {

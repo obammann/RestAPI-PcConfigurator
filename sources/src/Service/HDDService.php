@@ -172,6 +172,29 @@ class HDDService
      * @param $id
      * @return JsonResponse
      */
+    /**
+     * @SWG\Delete(
+     *     path="/hdd/{id}",
+     *     summary="Deletes a hdd",
+     *     description="",
+     *     operationId="deleteHDD",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"hdd"},
+     *     @SWG\Parameter(
+     *         description="hdd id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid hdd id"
+     *     ),
+     * )
+     */
     public function deleteHDD($id){
         $deleteResponse = new AbstractResponse();
         if ($id < $this->databaseSize) {

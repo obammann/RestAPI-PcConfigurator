@@ -177,6 +177,29 @@ class MainboardService
      * @param $id
      * @return JsonResponse
      */
+    /**
+     * @SWG\Delete(
+     *     path="/mmainboard/{id}",
+     *     summary="Deletes a mainboard",
+     *     description="",
+     *     operationId="deleteMainboard",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"mainboard"},
+     *     @SWG\Parameter(
+     *         description="mainboard id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid mmainboard id"
+     *     ),
+     * )
+     */
     public function deleteMainboard($id){
         $deleteResponse = new AbstractResponse();
         if ($id < $this->databaseSize) {

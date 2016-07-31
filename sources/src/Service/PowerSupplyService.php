@@ -126,6 +126,49 @@ class PowerSupplyService
      * @param $power
      * @return JsonResponse
      */
+    /**
+     * @SWG\Post(
+     *     path="/powersupply/{id}/{name}/{price}/{power}",
+     *     tags={"power supply"},
+     *     operationId="addPowerSupply",
+     *     summary="Add a new power supply",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the power supply",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="name of the power supply",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="price of the power supply",
+     *         required=true,
+     *         type="number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="power",
+     *         in="path",
+     *         description="power of the power supply",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function addPowerSupply($id, $name, $price, $power){
         $addPowerSupplyResponse = new AbstractResponse();
         if ($id > $this->databaseSize -1) {
@@ -152,6 +195,49 @@ class PowerSupplyService
      * @param $power
      * @return JsonResponse
      */
+    /**
+     * @SWG\Put(
+     *     path="/powersupply/{id}/{name}/{price}/{power}",
+     *     tags={"power supply"},
+     *     operationId="updatePowerSupply",
+     *     summary="update a power supply",
+     *     description="",
+     *     consumes={"application/json"},
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id of the power supply",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="new name of the power supply",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="price",
+     *         in="path",
+     *         description="new price of the power supply",
+     *         required=true,
+     *         type="number"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="power",
+     *         in="path",
+     *         description="new power of the power supply",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function updatePowerSupply($id, $name, $price, $power){
         $updateResponse = new AbstractResponse();
         if($id < $this->databaseSize) {
@@ -173,6 +259,29 @@ class PowerSupplyService
      * DELETE /powersupply/{id}
      * @param $id
      * @return JsonResponse
+     */
+    /**
+     * @SWG\Delete(
+     *     path="/powersupply/{id}",
+     *     summary="Deletes a power supply",
+     *     description="",
+     *     operationId="deletePowerSupply",
+     *     consumes={"application/json", "multipart/form-data", "application/x-www-form-urlencoded"},
+     *     produces={"application/json"},
+     *     tags={"power supply"},
+     *     @SWG\Parameter(
+     *         description="power supply id to delete",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="Invalid power supply id"
+     *     ),
+     * )
      */
     public function deletePowerSupply($id){
         $deleteResponse = new AbstractResponse();
