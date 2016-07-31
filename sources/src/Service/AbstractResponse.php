@@ -131,7 +131,7 @@ class AbstractResponse implements \JsonSerializable
             'Team member_1'     => "Fabian Redecker (375750)",
             'Team member_2'     => "Christoph Schütte ()",
             'Team member_3'     => "Oliver Bammann (360330)",
-            'Team member_4'     => "Lennart Ploog ()",
+            'Team member_4'     => "Lennart Ploog (356556)",
         ]);
     }
 

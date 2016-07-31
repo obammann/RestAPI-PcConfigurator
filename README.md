@@ -9,8 +9,8 @@
 - Einen Editor (vorzugsweise PhpStorm)
 
 ## Initiales Setup
-1. Klone dieses Repository `git clone git@github.com:Basster/hs-bremen-web-api.git`
-2. Wechsel in das Verzeichnis `cd hs-bremen-web-api`
+1. Klone dieses Repository `git clone https://github.com/obammann/RestAPI-PcConfigurator.git`
+2. Wechsel in das Verzeichnis `cd RestAPI-PcConfigurator`
 3. Starte die VM mit `vagrant up`
 4. Warte bis die VM erstellt wurde, währenddessen folgendes, als neue Zeile, in die Datei `C:\Windows\System32\drivers\etc\hosts` bzw. `/etc/hosts/` eintragen (Als Administrator/root bearbeiten):  
 ```
@@ -33,7 +33,7 @@
 ```
 6. Installiere die erforderlichen PHP Pakete: `composer install` (wenn lokale PHP Installation, sonst unter `/var/www/sources` per SSH auf der VM)
 7. Browser öffnen und `http://web-api.vm/` eingeben.
-8. Das `hs-bremen-web-api` Verzeichnis im Editor deiner Wahl öffnen.
+8. Das `RestAPI-PcConfigurator` Verzeichnis im Editor deiner Wahl öffnen.
 
 ## Vor jeder Session
 1. `vagrant up` (dauert jetzt nicht mehr so lange)
@@ -65,8 +65,14 @@ php vendor/bin/phpunit -c phpunit.xml.dist
 ```
 oder über die IDE
 
-TODO: PhpStorm Setup beschreiben!
+## Teammitglieder
+ - Fabian Redecker (375750)
+ - Christoph Schütte (377336)
+ - Lennart Ploog (356556)
+ - Oliver Bammann (360330)
 
+## Swagger
+Route: http://web-api.vm/api/swagger
 
 
 
